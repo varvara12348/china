@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China Guide | Путеводитель по Китаю</title>
+    <style>
+        /* ===== СБРОС И БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --mineral-red: #B93A32; /* Красный минерал */
+            --terracotta: #C67F59; /* Терракотовый акцент */
+            --charcoal: #2C2C2C; /* Угольно-черный */
+            --stone: #D8D2C5; /* Каменный светлый */
+            --sand: #F5F1E8; /* Песочный фон */
+            --white: #FFFFFF;
+            --gradient: linear-gradient(135deg, var(--mineral-red) 0%, var(--terracotta) 100%);
+            --shadow: 0 10px 30px rgba(185, 58, 50, 0.15);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--charcoal);
+            background: var(--sand);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(216, 210, 197, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-bottom-color: var(--mineral-red);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--mineral-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 600;
+            border: 2px solid var(--terracotta);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid rgba(185, 58, 50, 0.2);
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== МЕНЮ ===== */
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--mineral-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--mineral-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--mineral-red);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+         /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--mineral-red);
+            color: var(--white);
+            border: 1px solid var(--mineral-red);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(185, 58, 50, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--mineral-red);
+            border: 1px solid var(--mineral-red);
+        }
+
+        .btn-outline:hover {
+            background: rgba(185, 58, 50, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            background: linear-gradient(135deg, 
+                rgba(245, 241, 232, 0.9) 0%, 
+                rgba(216, 210, 197, 0.9) 100%);
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--mineral-red) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--terracotta) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+            position: relative;
+        }
+
+        .hero-text h1 span {
+            color: var(--mineral-red);
+            position: relative;
+        }
+
+        .hero-text h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(185, 58, 50, 0.1);
+            z-index: -1;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .image-frame {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            background: var(--terracotta);
+            opacity: 0.1;
+            border-radius: var(--radius);
+            z-index: -1;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            filter: sepia(0.1) contrast(1.1);
+        }
+
+        .image-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        .features {
+            padding: 8rem 0;
+            background: var(--white);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 5rem;
+            color: var(--charcoal);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 3rem 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(216, 210, 197, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--mineral-red);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(185, 58, 50, 0.1);
+            border-color: var(--mineral-red);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(185, 58, 50, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--mineral-red);
+            font-size: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--mineral-red);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--charcoal);
+            opacity: 0.7;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--mineral-red);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: 1rem;
+            color: var(--terracotta);
+        }
+
+        /* ===== МАТЕРИАЛЫ ===== */
+        .materials {
+            padding: 8rem 0;
+            background: var(--sand);
+            position: relative;
+        }
+
+        .materials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid var(--stone);
+            border-radius: 6px;
+            color: var(--charcoal);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--mineral-red);
+            color: var(--white);
+            border-color: var(--mineral-red);
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .material-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(216, 210, 197, 0.5);
+        }
+
+        .material-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(185, 58, 50, 0.1);
+            border-color: var(--mineral-red);
+        }
+
+        .material-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .material-card:hover .material-image {
+            transform: scale(1.05);
+        }
+
+        .material-content {
+            padding: 2.5rem;
+        }
+
+        .material-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(185, 58, 50, 0.1);
+            color: var(--mineral-red);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .material-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        .material-content p {
+            color: var(--charcoal);
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* ===== СТАТИСТИКА ===== */
+        .stats {
+            padding: 6rem 0;
+            background: var(--charcoal);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(185, 58, 50, 0.1) 50%, transparent 70%);
+            animation: shimmer 8s infinite linear;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--mineral-red);
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            border-top: 3px solid var(--mineral-red);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo .logo-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            border: 2px solid var(--terracotta);
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .footer-logo-subtext {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--mineral-red);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .footer-links a:hover {
+            color: var(--terracotta);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--mineral-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 3.2rem;
+            }
+            
+            .image-frame {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .hero {
+                padding-top: 150px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .materials-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+            
+            .features-grid,
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+            
+            .feature-card,
+            .material-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+     <!-- Шапка -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">中</div>
+                    <div>
+                        <div class="logo-text">China Guide</div>
+                        <div class="logo-subtext">Путеводитель по Поднебесной</div>
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                 <ul class="nav-links">
+                        <li><a href="index.html" class="nav-link active">Главная</a></li>
+                        <li><a href="about-china.html" class="nav-link">О Китае</a></li>
+                        <li><a href="knowledge.html" class="nav-link">База знаний</a></li>
+                        <li><a href="tests.html" class="nav-link">Тесты</a></li>
+                    </ul>
+                </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <h1>Исследуйте <span>Китай</span> с нами</h1>
+                    <p>
+                        Авторитетный гид по культуре, истории и современности Поднебесной. 
+                        Минеральная эстетика встречается с глубокими знаниями в нашем 
+                        уникальном путеводителе.
+                    </p>
+                    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                        <a href="#features" class="btn btn-primary">
+                            Начать исследование
+                        </a>
+                        <a href="knowledge.html" class="btn btn-outline">
+                            Изучить материалы
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image fade-in delay-1">
+                    <div class="image-frame">
+                        <img src="https://i.pinimg.com/originals/eb/f9/71/ebf9716e00e340927569649558254ce2.jpg" 
+                             alt="Китайский пейзаж">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Особенности -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Наши <span>принципы</span></h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Аутентичность</h3>
+                    <p>
+                        Работаем с первоисточниками и носителями культуры. 
+                        Каждый материал проверен экспертами в области синологии.
+                    </p>
+                    <a href="about-china.html" class="feature-link">
+                        Узнать больше
+                    </a>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">📚</div>
+                    <h3>Структурированность</h3>
+                    <p>
+                        Информация организована по уровням сложности и темам. 
+                        От базовых понятий до углубленного изучения культурных кодов.
+                    </p>
+                    <a href="knowledge.html" class="feature-link">
+                        Изучить структуру
+                    </a>
+                </div>
+                
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Академический подход</h3>
+                    <p>
+                        Сотрудничаем с университетами и культурными институтами. 
+                        Наши материалы используются в образовательных программах.
+                    </p>
+                    <a href="about-project.html" class="feature-link">
+                        О методике
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Материалы -->
+    <section class="materials">
+        <div class="container">
+            <div class="materials-header fade-in">
+                <h2 class="section-title" style="text-align: left; margin: 0;">
+                    Рекомендуемые <span>материалы</span>
+                </h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active">Все разделы</button>
+                    <button class="filter-btn">Культура</button>
+                    <button class="filter-btn">История</button>
+                    <button class="filter-btn">Современность</button>
+                </div>
+            </div>
+            
+            <div class="materials-grid">
+                <div class="material-card fade-in delay-1">
+                    <img src="https://avatars.mds.yandex.net/i?id=e7b2e7cb1f91d62304d2274a87d40f8c_l-4961046-images-thumbs&n=13" 
+                         alt="Шанхай" class="material-image">
+                    <div class="material-content">
+                        <span class="material-category">Архитектура</span>
+                        <h3>Эволюция китайской архитектуры</h3>
+                        <p>
+                            От традиционных пагод до современных небоскребов. 
+                            Как менялась архитектура Китая на протяжении веков.
+                        </p>
+                        <a href="knowledge.html" class="btn btn-outline" style="padding: 0.7rem 1.8rem;">
+                            Исследовать
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="material-card fade-in delay-2">
+                    <img src="https://i.pinimg.com/originals/23/7b/4f/237b4f04c4362ad78aaaec43aab8df9e.jpg" 
+                         alt="Еда" class="material-image">
+                    <div class="material-content">
+                        <span class="material-category">Кухня</span>
+                        <h3>Региональные кулинарные традиции</h3>
+                        <p>
+                            Восемь великих кухонь Китая. Философия, ингредиенты 
+                            и культурный контекст традиционных блюд.
+                        </p>
+                        <a href="knowledge.html" class="btn btn-outline" style="padding: 0.7rem 1.8rem;">
+                            Изучить
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="material-card fade-in delay-3">
+                    <img src="https://avatars.dzeninfra.ru/get-zen_doc/118017/pub_65048ad06f5c2b6a9aca6121_6511e962cefc281328bf6623/scale_1200" 
+                         alt="Этикет" class="material-image">
+                    <div class="material-content">
+                        <span class="material-category">Этикет</span>
+                        <h3>Межкультурная коммуникация</h3>
+                        <p>
+                            Как эффективно общаться с китайскими партнерами. 
+                            Особенности делового и социального этикета.
+                        </p>
+                        <a href="knowledge.html" class="btn btn-outline" style="padding: 0.7rem 1.8rem;">
+                            Узнать
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item fade-in">
+                    <div class="stat-number" data-count="500">500+</div>
+                    <p>Академических материалов</p>
+                </div>
+                <div class="stat-item fade-in delay-1">
+                    <div class="stat-number" data-count="50">50+</div>
+                    <p>Экспертов-авторов</p>
+                </div>
+                <div class="stat-item fade-in delay-2">
+                    <div class="stat-number" data-count="100">100%</div>
+                    <p>Проверенная информация</p>
+                </div>
+                <div class="stat-item fade-in delay-3">
+                    <div class="stat-number">5★</div>
+                    <p>Оценка пользователей</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="logo-icon">中</div>
+                            <div class="footer-logo-text">China Guide</div>
+                        </div>
+                        <p class="footer-logo-subtext">
+                            Авторитетный образовательный проект по изучению 
+                            китайской культуры, истории и современности.
+                        </p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">fb</a>
+                        <a href="#" class="social-link">yt</a>
+                        <a href="#" class="social-link">tg</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about-china.html">О Китае</a></li>
+                        <li><a href="knowledge.html">База знаний</a></li>
+                        <li><a href="tests.html">Тестирование</a></li>
+                        <li><a href="about-project.html">О проекте</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@chinaguide.ru">info@chinaguide.ru</a></li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li>Москва, Китайгородский пр., 7</li>
+                        <li>Пн-Пт, 9:00-18:00</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Партнеры</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Институт Конфуция</a></li>
+                        <li><a href="#">МГУ им. Ломоносова</a></li>
+                        <li><a href="#">Китайский культурный центр</a></li>
+                        <li><a href="#">Академия наук РФ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 China Guide. Все материалы защищены авторским правом.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Использование материалов возможно только с письменного разрешения редакции.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Динамическая шапка при скролле
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Анимация появления при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in, .delay-1, .delay-2, .delay-3').forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Анимация счетчиков
+        const counters = document.querySelectorAll('.stat-number[data-count]');
+        
+        const startCounterAnimation = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    const suffix = counter.textContent.includes('+') ? '+' : '';
+                    
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = Math.floor(current) + suffix;
+                    }, 30);
+                    
+                    observer.unobserve(counter);
+                }
+            });
+        };
+
+        const counterObserver = new IntersectionObserver(startCounterAnimation, { threshold: 0.5 });
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // Фильтрация материалов
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Эффект переключения
+                const cards = document.querySelectorAll('.material-card');
+                cards.forEach(card => {
+                    card.style.transform = 'scale(0.95)';
+                    card.style.opacity = '0.5';
+                    
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                        card.style.opacity = '1';
+                    }, 300);
+                });
+            });
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Эффект параллакса для фона героя
+        window.addEventListener('mousemove', (e) => {
+            const heroPattern = document.querySelector('.hero-pattern');
+            if (heroPattern) {
+                const x = (e.clientX / window.innerWidth) * 20;
+                const y = (e.clientY / window.innerHeight) * 20;
+                heroPattern.style.transform = `translate(${x}px, ${y}px)`;
+            }
+        });
+
+        // Активное меню при скролле
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const scrollPosition = window.scrollY + 150;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                } else if (current === '' && link.getAttribute('href') === 'index.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Эффект наведения на кнопки социальных сетей
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'rotate(5deg) translateY(-3px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'rotate(0) translateY(0)';
+            });
+        });
+
+        // Плавное появление сайта при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.6s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

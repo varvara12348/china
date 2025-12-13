@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тесты о Китае | China Guide</title>
+    <style>
+        /* ===== СТИЛИ ШАПКИ И ФУТЕРА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --mineral-red: #B93A32;
+            --terracotta: #C67F59;
+            --charcoal: #2C2C2C;
+            --stone: #D8D2C5;
+            --sand: #F5F1E8;
+            --white: #FFFFFF;
+            --correct: #4CAF50;
+            --incorrect: #F44336;
+            --gradient: linear-gradient(135deg, var(--mineral-red) 0%, var(--terracotta) 100%);
+            --shadow: 0 10px 30px rgba(185, 58, 50, 0.15);
+            --radius: 12px;
+        }
+
+         body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--charcoal);
+            background: var(--sand);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(216, 210, 197, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-bottom-color: var(--mineral-red);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--mineral-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 600;
+            border: 2px solid var(--terracotta);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid rgba(185, 58, 50, 0.2);
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        /* Навигация */
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--mineral-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--mineral-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--mineral-red);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+         /* КНОПКИ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--mineral-red);
+            color: var(--white);
+            border: 1px solid var(--mineral-red);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(185, 58, 50, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--mineral-red);
+            border: 1px solid var(--mineral-red);
+        }
+
+        .btn-outline:hover {
+            background: rgba(185, 58, 50, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Заголовок */
+        .page-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, 
+                rgba(185, 58, 50, 0.05) 0%, 
+                rgba(198, 127, 89, 0.05) 100%);
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .page-title span {
+            color: var(--mineral-red);
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+        }
+
+        /* Тесты */
+        .tests-section {
+            padding: 4rem 0;
+            background: var(--white);
+        }
+
+        .tests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .test-card {
+            background: var(--sand);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--stone);
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--mineral-red);
+        }
+
+        .test-header {
+            background: var(--mineral-red);
+            color: var(--white);
+            padding: 1.5rem;
+        }
+
+        .test-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .test-difficulty {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .test-content {
+            padding: 2rem;
+        }
+
+        .test-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .test-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .start-test {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--mineral-red);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .start-test:hover {
+            background: var(--terracotta);
+        }
+
+        /* Модальное окно теста */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            background: var(--mineral-red);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--stone);
+            width: 100%;
+            margin-top: 1rem;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--white);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            padding: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style: none;
+        }
+
+        .option {
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--stone);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            background: rgba(185, 58, 50, 0.1);
+            border-color: var(--mineral-red);
+        }
+
+        .option.selected {
+            background: rgba(185, 58, 50, 0.1);
+            border-color: var(--mineral-red);
+        }
+
+        .option-number {
+            width: 30px;
+            height: 30px;
+            background: var(--stone);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .option.selected .option-number {
+            background: var(--mineral-red);
+            color: var(--white);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            border-top: 1px solid var(--stone);
+        }
+
+        .nav-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .prev-btn {
+            background: var(--stone);
+            color: var(--charcoal);
+        }
+
+        .prev-btn:hover:not(:disabled) {
+            background: var(--terracotta);
+            color: var(--white);
+        }
+
+        .prev-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .next-btn {
+            background: var(--mineral-red);
+            color: var(--white);
+        }
+
+        .next-btn:hover {
+            background: var(--terracotta);
+        }
+
+        .question-counter {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        /* Результаты */
+        .results-container {
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-title {
+            font-size: 2rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+
+        .result-percentage {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--mineral-red);
+            margin: 1.5rem 0;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: var(--sand);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--mineral-red);
+        }
+
+        .result-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .result-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .retry-btn {
+            background: var(--mineral-red);
+            color: var(--white);
+        }
+
+        .retry-btn:hover {
+            background: var(--terracotta);
+        }
+
+        .close-btn {
+            background: var(--stone);
+            color: var(--charcoal);
+        }
+
+        .close-btn:hover {
+            background: var(--terracotta);
+            color: var(--white);
+        }
+
+        /* Футер */
+         .footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            border-top: 3px solid var(--mineral-red);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo .logo-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            border: 2px solid var(--terracotta);
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .footer-logo-subtext {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--mineral-red);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .footer-links a:hover {
+            color: var(--terracotta);
+            padding-left: 5px;
+        }
+
+         .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--mineral-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+         .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--mineral-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .tests-grid {
+                grid-template-columns: 1fr;
+            }
+            .result-buttons {
+                flex-direction: column;
+            }
+        }
+
+        #progressWidget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--mineral-red);
+            z-index: 1000;
+            max-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .progress-widget-content {
+            position: relative;
+        }
+
+        .progress-widget-content h3 {
+            color: var(--mineral-red);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .progress-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .progress-stats div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-stats strong {
+            color: var(--mineral-red);
+            font-size: 1.1rem;
+        }
+
+        .close-widget-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 25px;
+            height: 25px;
+            background: var(--mineral-red);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка -->
+   <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">中</div>
+                    <div>
+                        <div class="logo-text">China Guide</div>
+                        <div class="logo-subtext">Путеводитель по Поднебесной</div>
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                  <ul class="nav-links">
+                        <li><a href="index.html" class="nav-link">Главная</a></li>
+                        <li><a href="about-china.html" class="nav-link">О Китае</a></li>
+                        <li><a href="knowledge.html" class="nav-link">База знаний</a></li>
+                        <li><a href="tests.html" class="nav-link active">Тесты</a></li>
+                    </ul>
+                    
+                    <button class="btn btn-outline" id="progressBtn" style="padding: 0.8rem 1.5rem; position: relative;">
+                        <span id="progressText">Прогресс</span>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Заголовок -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Тесты о <span>Китае</span></h1>
+            <p class="page-subtitle">Проверьте свои знания и узнайте новое</p>
+        </div>
+    </section>
+
+    <!-- Тесты -->
+    <section class="tests-section">
+        <div class="container">
+            <div class="tests-grid">
+                <!-- Тест 1 -->
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>История Китая: основы</h3>
+                        <span class="test-difficulty">Начальный уровень</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <span>7 вопросов</span>
+                            <span>15 минут</span>
+                            <span>Прошли: 2.4К</span>
+                        </div>
+                        <p>Проверьте свои знания об основных исторических периодах, 
+                        династиях и ключевых событиях в истории Китая.</p>
+                        <button class="start-test" data-test="history">Начать тест</button>
+                    </div>
+                </div>
+
+                <!-- Тест 2 -->
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Китайская кухня</h3>
+                        <span class="test-difficulty">Средний уровень</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <span>5 вопросов</span>
+                            <span>12 минут</span>
+                            <span>Прошли: 1.8К</span>
+                        </div>
+                        <p>Насколько хорошо вы знаете региональные кухни, 
+                        традиционные блюда и кулинарные обычаи Китая?</p>
+                        <button class="start-test" data-test="cuisine">Начать тест</button>
+                    </div>
+                </div>
+
+                <!-- Тест 3 -->
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Культура и традиции</h3>
+                        <span class="test-difficulty">Начальный уровень</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <span>4 вопроса</span>
+                            <span>18 минут</span>
+                            <span>Прошли: 3.1К</span>
+                        </div>
+                        <p>Философия, искусство, праздники и повседневные 
+                        традиции китайского народа.</p>
+                        <button class="start-test" data-test="culture">Начать тест</button>
+                    </div>
+                </div>
+
+                <!-- Тест 4 -->
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>География Китая</h3>
+                        <span class="test-difficulty">Средний уровень</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <span>8 вопросов</span>
+                            <span>20 минут</span>
+                            <span>Прошли: 1.2К</span>
+                        </div>
+                        <p>Регионы, города, природные достопримечательности 
+                        и климатические зоны Китая.</p>
+                        <button class="start-test" data-test="geography">Начать тест</button>
+                    </div>
+                </div>
+
+                <!-- Тест 5 -->
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Язык и письменность</h3>
+                        <span class="test-difficulty">Сложный уровень</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <span>6 вопросов</span>
+                            <span>15 минут</span>
+                            <span>Прошли: 1.0К</span>
+                        </div>
+                        <p>Основы китайской письменности, иероглифы, 
+                        тоны и особенности языка.</p>
+                        <button class="start-test" data-test="language">Начать тест</button>
+                    </div>
+                </div>
+
+                <!-- Тест 6 -->
+                <div class="test-card">
+                    <div class="test-header">
+                        <h3>Современный Китай</h3>
+                        <span class="test-difficulty">Продвинутый</span>
+                    </div>
+                    <div class="test-content">
+                        <div class="test-stats">
+                            <span>7 вопросов</span>
+                            <span>25 минут</span>
+                            <span>Прошли: 890</span>
+                        </div>
+                        <p>Экономика, технологии, политика и социальные 
+                        изменения в современном Китае.</p>
+                        <button class="start-test" data-test="modern">Начать тест</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно теста -->
+    <div class="modal" id="testModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2 id="testTitle">Тест: История Китая</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <!-- Экран вопросов -->
+            <div class="question-container" id="questionScreen">
+                <div class="question-text" id="questionText">
+                    Вопрос 1: Какая династия считается первой исторически подтвержденной династией Китая?
+                </div>
+                
+                <ul class="options-list" id="optionsList">
+                    <!-- Опции будут добавляться JavaScript -->
+                </ul>
+                
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" id="prevBtn">← Предыдущий</button>
+                    <div class="question-counter">
+                        Вопрос <span id="currentQuestion">1</span> из <span id="totalQuestions">10</span>
+                    </div>
+                    <button class="nav-btn next-btn" id="nextBtn">Следующий →</button>
+                </div>
+            </div>
+
+            <!-- Экран результатов -->
+            <div class="results-container" id="resultsScreen" style="display: none;">
+                <div class="result-icon" id="resultIcon">🏆</div>
+                <h2 class="result-title" id="resultTitle">Тест завершен!</h2>
+                
+                <div class="result-percentage" id="resultPercentage">85%</div>
+                
+                <div class="result-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div>Правильных ответов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalQuestionsResult">0</div>
+                        <div>Всего вопросов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div>Неправильных ответов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="successRate">0%</div>
+                        <div>Успешность</div>
+                    </div>
+                </div>
+
+                <div id="resultMessage">
+                    <p>Отличный результат! Вы хорошо знаете историю Китая.</p>
+                </div>
+
+                <div class="result-buttons">
+                    <button class="result-btn retry-btn" id="retryBtn">Пройти заново</button>
+                    <button class="result-btn close-btn" id="closeResultsBtn">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+     <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="logo-icon">中</div>
+                            <div class="footer-logo-text">China Guide</div>
+                        </div>
+                        <p class="footer-logo-subtext">
+                            Авторитетный образовательный проект по изучению 
+                            китайской культуры, истории и современности.
+                        </p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">fb</a>
+                        <a href="#" class="social-link">yt</a>
+                        <a href="#" class="social-link">tg</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about-china.html">О Китае</a></li>
+                        <li><a href="knowledge.html">База знаний</a></li>
+                        <li><a href="tests.html">Тестирование</a></li>
+                        <li><a href="about-project.html">О проекте</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@chinaguide.ru">info@chinaguide.ru</a></li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li>Москва, Китайгородский пр., 7</li>
+                        <li>Пн-Пт, 9:00-18:00</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Партнеры</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Институт Конфуция</a></li>
+                        <li><a href="#">МГУ им. Ломоносова</a></li>
+                        <li><a href="#">Китайский культурный центр</a></li>
+                        <li><a href="#">Академия наук РФ</a></li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="footer-bottom">
+                <p>© 2025 China Guide. Все материалы защищены авторским правом.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Использование материалов возможно только с письменного разрешения редакции.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // ===== СИСТЕМА ПРОГРЕССА =====
+    const PROGRESS_KEY = 'china_tests_progress';
+    const TESTS_COUNT = 6;
+
+    // Инициализация прогресса
+    function initializeProgress() {
+        let progress = localStorage.getItem(PROGRESS_KEY);
+        if (!progress) {
+            progress = {
+                completedTests: 0,
+                totalScore: 0,
+                correctAnswers: 0,
+                totalQuestions: 0,
+                tests: {}
+            };
+            localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        }
+        return JSON.parse(progress);
+    }
+
+    // Сохранить результат теста
+    function saveTestResult(testId, testData) {
+        let progress = JSON.parse(localStorage.getItem(PROGRESS_KEY)) || initializeProgress();
+        
+        // Проверяем, был ли уже пройден этот тест
+        const wasCompleted = progress.tests[testId]?.completed || false;
+        
+        // Рассчитываем результаты текущего теста
+        let correctCount = 0;
+        testData.questions.forEach((question, index) => {
+            if (userAnswers[index] === question.correct) {
+                correctCount++;
+            }
+        });
+        
+        const totalQuestions = testData.questions.length;
+        const percentage = Math.round((correctCount / totalQuestions) * 100);
+        const score = Math.round(percentage / 10); // Баллы от 0 до 10
+        
+        // Сохраняем данные теста
+        progress.tests[testId] = {
+            completed: true,
+            score: score,
+            correctAnswers: correctCount,
+            totalQuestions: totalQuestions,
+            percentage: percentage,
+            lastAttempt: new Date().toISOString()
+        };
+        
+        // Обновляем общую статистику
+        progress.completedTests = Object.keys(progress.tests).filter(id => progress.tests[id].completed).length;
+        progress.totalScore = Object.values(progress.tests).reduce((sum, test) => sum + test.score, 0);
+        progress.correctAnswers = Object.values(progress.tests).reduce((sum, test) => sum + test.correctAnswers, 0);
+        progress.totalQuestions = Object.values(progress.tests).reduce((sum, test) => sum + test.totalQuestions, 0);
+        
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
+        return { wasCompleted, newScore: score };
+    }
+
+    // Обновить виджет прогресса
+    function updateProgressWidget() {
+        const progress = initializeProgress();
+        
+        document.getElementById('completedTests').textContent = progress.completedTests;
+        document.getElementById('totalTests').textContent = TESTS_COUNT;
+        document.getElementById('totalScore').textContent = progress.totalScore;
+        document.getElementById('correctAnswersTotal').textContent = progress.correctAnswers;
+        document.getElementById('totalQuestionsAll').textContent = progress.totalQuestions;
+        
+        // Обновить текст на кнопке прогресса
+        const progressText = document.getElementById('progressText');
+        if (progress.completedTests > 0) {
+            progressText.innerHTML = `Прогресс (${progress.completedTests}/${TESTS_COUNT})`;
+        } else {
+            progressText.textContent = 'Прогресс';
+        }
+    }
+
+    // Функция обновления статуса тестов на карточках
+    function updateTestCardsStatus() {
+        const progress = initializeProgress();
+        
+        document.querySelectorAll('.test-card').forEach(card => {
+            const startBtn = card.querySelector('.start-test');
+            const testId = startBtn.getAttribute('data-test');
+            const testData = progress.tests[testId];
+            
+            if (testData?.completed) {
+                // Добавляем бейдж пройденного теста
+                const testHeader = card.querySelector('.test-header');
+                if (!card.querySelector('.test-completed-badge')) {
+                    const badge = document.createElement('span');
+                    badge.className = 'test-completed-badge';
+                    badge.textContent = '✓ Пройден';
+                    badge.style.cssText = `
+                        display: inline-block;
+                        margin-left: 10px;
+                        padding: 2px 8px;
+                        background: var(--correct);
+                        color: white;
+                        border-radius: 12px;
+                        font-size: 0.8rem;
+                        font-weight: 600;
+                    `;
+                    testHeader.appendChild(badge);
+                }
+                
+                // Обновляем текст кнопки
+                startBtn.innerHTML = `Повторить (${testData.score}/10)`;
+            }
+        });
+    }
+
+    // ===== ОСНОВНОЙ КОД СИСТЕМЫ ТЕСТОВ =====
+    // БАЗА ДАННЫХ ТЕСТОВ
+    const testsDatabase = {
+        // История Китая
+        history: {
+            title: "История Китая: основы",
+            questions: [
+                {
+                    question: "Какая династия считается первой исторически подтвержденной династией Китая?",
+                    options: ["Династия Цинь", "Династия Хань", "Династия Шан", "Династия Мин"],
+                    correct: 2
+                },
+                {
+                    question: "Кто объединил Китай и основал династию Цинь?",
+                    options: ["Цинь Шихуанди", "У-ди", "Тай-цзу", "Хубилай"],
+                    correct: 0
+                },
+                {
+                    question: "Какой период считается золотым веком китайской философии?",
+                    options: ["Династия Цин", "Династия Мин", "Период Сражающихся царств", "Династия Хань"],
+                    correct: 2
+                },
+                {
+                    question: "Что было построено во время правления династии Цинь для защиты от кочевников?",
+                    options: ["Великая Китайская стена", "Запретный город", "Терракотовая армия", "Летний дворец"],
+                    correct: 0
+                },
+                {
+                    question: "Какая династия открыла Великий шелковый путь?",
+                    options: ["Хань", "Тан", "Сун", "Юань"],
+                    correct: 0
+                },
+                {
+                    question: "Кто был последним императором Китая?",
+                    options: ["Пу И", "Цяньлун", "Канси", "Юнчжэн"],
+                    correct: 0
+                },
+                {
+                    question: "В каком году была основана Китайская Народная Республика?",
+                    options: ["1945", "1949", "1953", "1958"],
+                    correct: 1
+                }
+            ]
+        },
+        
+        // Китайская кухня
+        cuisine: {
+            title: "Китайская кухня",
+            questions: [
+                {
+                    question: "Какой регион Китая известен самой острой кухней?",
+                    options: ["Сычуань", "Кантон", "Пекин", "Шанхай"],
+                    correct: 0
+                },
+                {
+                    question: "Какое блюдо является символом долголетия в китайской культуре?",
+                    options: ["Утка по-пекински", "Лапша долголетия", "Димсам", "Жареный рис"],
+                    correct: 1
+                },
+                {
+                    question: "Какой чай самый популярный в Китае?",
+                    options: ["Зеленый", "Улун", "Пуэр", "Жасминовый"],
+                    correct: 0
+                },
+                {
+                    question: "Что означает слово 'димсам'?",
+                    options: ["Трапеза сердца", "Прикосновение к сердцу", "Точка на сердце", "Маленькая закуска"],
+                    correct: 1
+                },
+                {
+                    question: "Какой регион славится кантонской кухней?",
+                    options: ["Гуандун", "Сычуань", "Хунань", "Чжэцзян"],
+                    correct: 0
+                }
+            ]
+        },
+        
+        // Культура и традиции
+        culture: {
+            title: "Культура и традиции",
+            questions: [
+                {
+                    question: "Какой цвет символизирует удачу и счастье в китайской культуре?",
+                    options: ["Красный", "Золотой", "Зеленый", "Синий"],
+                    correct: 0
+                },
+                {
+                    question: "Что означает традиционное приветствие 'ни хао'?",
+                    options: ["Добро пожаловать", "Как дела?", "Ты хороший", "Здравствуйте"],
+                    correct: 3
+                },
+                {
+                    question: "Какой праздник является самым важным в Китае?",
+                    options: ["Праздник Луны", "Праздник весны", "Праздник дракона", "Праздник фонарей"],
+                    correct: 1
+                },
+                {
+                    question: "Что символизирует дракон в китайской культуре?",
+                    options: ["Сила и удача", "Мудрость", "Долголетие", "Богатство"],
+                    correct: 0
+                }
+            ]
+        },
+        
+        // География Китая
+        geography: {
+            title: "География Китая",
+            questions: [
+                {
+                    question: "Какая река считается колыбелью китайской цивилизации?",
+                    options: ["Янцзы", "Хуанхэ", "Меконг", "Сицзян"],
+                    correct: 1
+                },
+                {
+                    question: "Какой город является столицей Китая?",
+                    options: ["Шанхай", "Пекин", "Гуанчжоу", "Шэньчжэнь"],
+                    correct: 1
+                },
+                {
+                    question: "Какая пустыня расположена на севере Китая?",
+                    options: ["Гоби", "Сахара", "Такла-Макан", "Каракумы"],
+                    correct: 0
+                },
+                {
+                    question: "Сколько провинций в Китае?",
+                    options: ["23", "31", "28", "34"],
+                    correct: 1
+                },
+                {
+                    question: "Какое плато является самым высоким в мире?",
+                    options: ["Тибетское", "Монгольское", "Юньнань-Гуйчжоу", "Лёссовое"],
+                    correct: 0
+                },
+                {
+                    question: "Какой пролив отделяет Китай от Тайваня?",
+                    options: ["Тайваньский", "Лусонский", "Корейский", "Тонкинский"],
+                    correct: 0
+                },
+                {
+                    question: "Какая гора считается самой священной в Китае?",
+                    options: ["Тайшань", "Хуаншань", "Эмэйшань", "Утайшань"],
+                    correct: 0
+                },
+                {
+                    question: "Какой климат преобладает на юге Китая?",
+                    options: ["Умеренный", "Субтропический", "Тропический", "Континентальный"],
+                    correct: 1
+                }
+            ]
+        },
+        
+        // Язык и письменность
+        language: {
+            title: "Язык и письменность",
+            questions: [
+                {
+                    question: "Сколько тонов в стандартном китайском языке (путунхуа)?",
+                    options: ["3", "4", "5", "6"],
+                    correct: 1
+                },
+                {
+                    question: "Как называется система китайской письменности?",
+                    options: ["Иероглифика", "Кандзи", "Ханьцзы", "Катакана"],
+                    correct: 2
+                },
+                {
+                    question: "Сколько примерно иероглифов нужно знать для чтения газет?",
+                    options: ["1000", "2000", "3000", "5000"],
+                    correct: 2
+                },
+                {
+                    question: "Какой порядок черт считается правильным при написании иероглифов?",
+                    options: [
+                        "Сверху вниз, слева направо",
+                        "Снизу вверх, справа налево", 
+                        "По кругу", 
+                        "Без определенного порядка"
+                    ],
+                    correct: 0
+                },
+                {
+                    question: "Что такое пиньинь?",
+                    options: [
+                        "Система транскрипции китайских иероглифов латиницей",
+                        "Древний стиль каллиграфии",
+                        "Традиционная система записи",
+                        "Диалект южного Китая"
+                    ],
+                    correct: 0
+                },
+                {
+                    question: "Какой иероглиф означает 'человек'?",
+                    options: ["人", "大", "天", "日"],
+                    correct: 0
+                }
+            ]
+        },
+        
+        // Современный Китай
+        modern: {
+            title: "Современный Китай",
+            questions: [
+                {
+                    question: "Какой город является финансовым центром Китая?",
+                    options: ["Пекин", "Шанхай", "Шэньчжэнь", "Гонконг"],
+                    correct: 1
+                },
+                {
+                    question: "Какая компания является крупнейшим производителем смартфонов в Китае?",
+                    options: ["Huawei", "Xiaomi", "Oppo", "Vivo"],
+                    correct: 0
+                },
+                {
+                    question: "Как называется китайская инициатива по развитию инфраструктуры?",
+                    options: [
+                        "Новый шелковый путь",
+                        "Азиатский банк инфраструктуры", 
+                        "Проект 'Великое возрождение'", 
+                        "Восточный экономический коридор"
+                    ],
+                    correct: 0
+                },
+                {
+                    question: "Какой город называют 'кремниевой долиной' Китая?",
+                    options: ["Шэньчжэнь", "Ханчжоу", "Чэнду", "Сучжоу"],
+                    correct: 0
+                },
+                {
+                    question: "Какая социальная сеть самая популярная в Китае?",
+                    options: ["WeChat", "QQ", "Weibo", "Douyin"],
+                    correct: 0
+                },
+                {
+                    question: "Какой показатель ВВП Китая в мировом рейтинге?",
+                    options: ["Первый", "Второй", "Третий", "Четвертый"],
+                    correct: 1
+                },
+                {
+                    question: "Какая скорость поездов на высокоскоростной железной дороге Китая?",
+                    options: ["200-250 км/ч", "300-350 км/ч", "400-450 км/ч", "500+ км/ч"],
+                    correct: 1
+                }
+            ]
+        }
+    };
+
+    // Переменные состояния
+    let currentTest = null;
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let testInProgress = false;
+
+    // Элементы DOM
+    const testModal = document.getElementById('testModal');
+    const questionScreen = document.getElementById('questionScreen');
+    const resultsScreen = document.getElementById('resultsScreen');
+    const testTitle = document.getElementById('testTitle');
+    const questionText = document.getElementById('questionText');
+    const optionsList = document.getElementById('optionsList');
+    const currentQuestionEl = document.getElementById('currentQuestion');
+    const totalQuestionsEl = document.getElementById('totalQuestions');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressFill = document.getElementById('progressFill');
+
+    // Кнопки результатов
+    const resultPercentage = document.getElementById('resultPercentage');
+    const correctAnswersEl = document.getElementById('correctAnswers');
+    const totalQuestionsResult = document.getElementById('totalQuestionsResult');
+    const incorrectAnswersEl = document.getElementById('incorrectAnswers');
+    const successRateEl = document.getElementById('successRate');
+    const resultMessage = document.getElementById('resultMessage');
+    const retryBtn = document.getElementById('retryBtn');
+    const closeResultsBtn = document.getElementById('closeResultsBtn');
+
+    // ===== ФУНКЦИИ УПРАВЛЕНИЯ ТЕСТАМИ =====
+    // Начать тест
+    function startTest(testId) {
+        currentTest = testsDatabase[testId];
+        if (!currentTest) {
+            alert('Тест не найден');
+            return;
+        }
+
+        currentQuestionIndex = 0;
+        userAnswers = new Array(currentTest.questions.length).fill(null);
+        testInProgress = true;
+
+        // Настройка интерфейса
+        testTitle.textContent = currentTest.title;
+        totalQuestionsEl.textContent = currentTest.questions.length;
+        totalQuestionsResult.textContent = currentTest.questions.length;
+
+        // Показать модальное окно
+        showQuestionScreen();
+        testModal.style.display = 'flex';
+        updateProgressBar();
+    }
+
+    // Показать экран вопросов
+    function showQuestionScreen() {
+        questionScreen.style.display = 'block';
+        resultsScreen.style.display = 'none';
+        showCurrentQuestion();
+    }
+
+    // Показать текущий вопрос
+    function showCurrentQuestion() {
+        const question = currentTest.questions[currentQuestionIndex];
+        
+        // Обновить текст вопроса
+        questionText.textContent = `Вопрос ${currentQuestionIndex + 1}: ${question.question}`;
+        currentQuestionEl.textContent = currentQuestionIndex + 1;
+
+        // Очистить и добавить варианты ответов
+        optionsList.innerHTML = '';
+        question.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.className = 'option';
+            if (userAnswers[currentQuestionIndex] === index) {
+                li.classList.add('selected');
+            }
+            
+            li.innerHTML = `
+                <div class="option-number">${String.fromCharCode(65 + index)}</div>
+                <div class="option-text">${option}</div>
+            `;
+            
+            li.addEventListener('click', () => selectAnswer(index));
+            optionsList.appendChild(li);
+        });
+
+        // Обновить состояние кнопок
+        prevBtn.disabled = currentQuestionIndex === 0;
+        if (currentQuestionIndex === currentTest.questions.length - 1) {
+            nextBtn.textContent = 'Завершить тест';
+        } else {
+            nextBtn.textContent = 'Следующий →';
+        }
+
+        updateProgressBar();
+    }
+
+    // Обновить прогресс-бар
+    function updateProgressBar() {
+        const progress = ((currentQuestionIndex + 1) / currentTest.questions.length) * 100;
+        progressFill.style.width = `${progress}%`;
+    }
+
+    // Выбрать ответ
+    function selectAnswer(answerIndex) {
+        // Снять выделение со всех вариантов
+        document.querySelectorAll('.option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        // Выделить выбранный вариант
+        const selectedOption = document.querySelectorAll('.option')[answerIndex];
+        selectedOption.classList.add('selected');
+        
+        // Сохранить ответ
+        userAnswers[currentQuestionIndex] = answerIndex;
+    }
+
+    // Завершить тест и показать результаты
+    function completeTest() {
+        // Проверить, что все вопросы отвечены
+        const unansweredQuestions = userAnswers.filter(answer => answer === null).length;
+        if (unansweredQuestions > 0) {
+            const confirmComplete = confirm(`У вас есть ${unansweredQuestions} неотвеченных вопросов. Завершить тест?`);
+            if (!confirmComplete) return;
+        }
+
+        // Рассчитать результаты
+        let correctCount = 0;
+        currentTest.questions.forEach((question, index) => {
+            if (userAnswers[index] === question.correct) {
+                correctCount++;
+            }
+        });
+
+        const totalQuestions = currentTest.questions.length;
+        const percentage = Math.round((correctCount / totalQuestions) * 100);
+        const incorrectCount = totalQuestions - correctCount;
+
+        // Сохранить результат теста
+        const testId = Object.keys(testsDatabase).find(key => testsDatabase[key] === currentTest);
+        const result = saveTestResult(testId, currentTest);
+        
+        // Обновить результаты
+        resultPercentage.textContent = `${percentage}%`;
+        correctAnswersEl.textContent = correctCount;
+        totalQuestionsResult.textContent = totalQuestions;
+        incorrectAnswersEl.textContent = incorrectCount;
+        successRateEl.textContent = `${percentage}%`;
+
+        // Показать сообщение в зависимости от результата
+        let message = '';
+        let icon = '';
+        
+        if (percentage >= 90) {
+            message = 'Превосходно! Вы настоящий эксперт по Китаю!';
+            icon = '🏆';
+        } else if (percentage >= 70) {
+            message = 'Отличный результат! Вы хорошо знаете материал.';
+            icon = '⭐';
+        } else if (percentage >= 50) {
+            message = 'Хороший результат! Есть что подучить.';
+            icon = '✅';
+        } else {
+            message = 'Есть над чем поработать! Попробуйте еще раз.';
+            icon = '📖';
+        }
+        
+        // Добавить информацию о прогрессе
+        if (result.wasCompleted) {
+            message += `<br><small>Тест уже был пройден ранее. Новый результат: ${result.newScore}/10 баллов</small>`;
+        } else {
+            message += `<br><small>Получено ${result.newScore}/10 баллов</small>`;
+        }
+
+        document.getElementById('resultIcon').textContent = icon;
+        resultMessage.innerHTML = `<p>${message}</p>`;
+
+        // Переключить на экран результатов
+        questionScreen.style.display = 'none';
+        resultsScreen.style.display = 'block';
+        
+        // Обновить виджет прогресса
+        updateProgressWidget();
+        updateTestCardsStatus();
+    }
+
+    // ===== ИНИЦИАЛИЗАЦИЯ И ОБРАБОТЧИКИ СОБЫТИЙ =====
+    // Запуск теста
+    document.querySelectorAll('.start-test').forEach(button => {
+        button.addEventListener('click', function() {
+            const testId = this.getAttribute('data-test');
+            const progress = initializeProgress();
+            
+            // Проверить, пройден ли тест
+            if (progress.tests[testId]?.completed) {
+                const testData = progress.tests[testId];
+                const confirmRetake = confirm(
+                    `Вы уже проходили этот тест.\n` +
+                    `Результат: ${testData.score}/10 баллов (${testData.percentage}%)\n` +
+                    `Правильных ответов: ${testData.correctAnswers}/${testData.totalQuestions}\n\n` +
+                    `Пройти заново?`
+                );
+                if (!confirmRetake) return;
+            }
+            
+            startTest(testId);
+        });
+    });
+
+    // Перейти к следующему вопросу
+    nextBtn.addEventListener('click', function() {
+        if (currentQuestionIndex < currentTest.questions.length - 1) {
+            // Сохранить ответ, если выбран
+            if (userAnswers[currentQuestionIndex] === null) {
+                alert('Пожалуйста, выберите ответ перед переходом к следующему вопросу');
+                return;
+            }
+            currentQuestionIndex++;
+            showCurrentQuestion();
+        } else {
+            // Завершить тест
+            completeTest();
+        }
+    });
+
+    // Вернуться к предыдущему вопросу
+    prevBtn.addEventListener('click', function() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            showCurrentQuestion();
+        }
+    });
+
+    // Закрыть модальное окно
+    document.querySelector('.close-modal').addEventListener('click', function() {
+        if (testInProgress) {
+            const confirmClose = confirm('Тест не завершен. Вы уверены, что хотите закрыть?');
+            if (!confirmClose) return;
+        }
+        testModal.style.display = 'none';
+        testInProgress = false;
+    });
+
+    // Закрыть по клику на фон
+    testModal.addEventListener('click', function(e) {
+        if (e.target === testModal) {
+            if (testInProgress) {
+                const confirmClose = confirm('Тест не завершен. Вы уверены, что хотите закрыть?');
+                if (!confirmClose) return;
+            }
+            testModal.style.display = 'none';
+            testInProgress = false;
+        }
+    });
+
+    // Пройти тест заново
+    retryBtn.addEventListener('click', function() {
+        startTest(Object.keys(testsDatabase).find(key => testsDatabase[key] === currentTest));
+    });
+
+    // Закрыть результаты
+    closeResultsBtn.addEventListener('click', function() {
+        testModal.style.display = 'none';
+        testInProgress = false;
+    });
+
+    // Сохранять ответы при нажатии клавиш
+    document.addEventListener('keydown', function(e) {
+        if (!testInProgress) return;
+
+        // 1-4 для выбора ответа
+        if (e.key >= '1' && e.key <= '4') {
+            const answerIndex = parseInt(e.key) - 1;
+            if (answerIndex < currentTest.questions[currentQuestionIndex].options.length) {
+                selectAnswer(answerIndex);
+            }
+        }
+
+        // Стрелки для навигации
+        if (e.key === 'ArrowRight' || e.key === 'Enter') {
+            nextBtn.click();
+        }
+        if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        }
+    });
+
+    // Шапка при скролле
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // ===== ВИДЖЕТ ПРОГРЕССА =====
+    // Создаем виджет прогресса
+    const progressWidgetHTML = `
+        <div id="progressWidget" style="display: none;">
+            <div class="progress-widget-content">
+                <button class="close-widget-btn">&times;</button>
+                <h3>Ваш прогресс</h3>
+                <div class="progress-stats">
+                    <div>Пройдено тестов: <strong id="completedTests">0</strong>/<span id="totalTests">6</span></div>
+                    <div>Общий балл: <strong id="totalScore">0</strong></div>
+                    <div>Правильных ответов: <strong id="correctAnswersTotal">0</strong></div>
+                    <div>Всего вопросов: <strong id="totalQuestionsAll">0</strong></div>
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                    <button class="nav-btn" id="resetProgressBtn" style="background: var(--incorrect); color: white; width: 100%;">
+                        Сбросить прогресс
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Добавляем виджет в DOM
+    document.body.insertAdjacentHTML('beforeend', progressWidgetHTML);
+
+    // Показать/скрыть виджет прогресса
+    const progressBtn = document.getElementById('progressBtn');
+    const progressWidget = document.getElementById('progressWidget');
+    const closeWidgetBtn = progressWidget.querySelector('.close-widget-btn');
+    const resetProgressBtn = document.getElementById('resetProgressBtn');
+
+    progressBtn.addEventListener('click', function() {
+        updateProgressWidget();
+        progressWidget.style.display = 'block';
+    });
+
+    closeWidgetBtn.addEventListener('click', function() {
+        progressWidget.style.display = 'none';
+    });
+
+    // Сброс прогресса
+    resetProgressBtn.addEventListener('click', function() {
+        if (confirm('Вы уверены, что хотите сбросить весь прогресс? Все результаты будут удалены.')) {
+            localStorage.removeItem(PROGRESS_KEY);
+            updateProgressWidget();
+            updateTestCardsStatus();
+            alert('Прогресс сброшен!');
+            
+            // Обновляем кнопки на карточках
+            document.querySelectorAll('.start-test').forEach(btn => {
+                btn.innerHTML = 'Начать тест';
+            });
+            
+            // Удаляем бейджи
+            document.querySelectorAll('.test-completed-badge').forEach(badge => {
+                badge.remove();
+            });
+        }
+    });
+
+    // Закрытие виджета при клике вне его
+    document.addEventListener('click', function(event) {
+        const widget = document.getElementById('progressWidget');
+        const progressBtn = document.getElementById('progressBtn');
+        
+        if (widget.style.display === 'block' && 
+            !widget.contains(event.target) && 
+            !progressBtn.contains(event.target)) {
+            widget.style.display = 'none';
+        }
+    });
+
+    // ===== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ =====
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализируем прогресс
+        initializeProgress();
+        updateProgressWidget();
+        updateTestCardsStatus();
+        
+        // Обновляем количество тестов в виджете
+        document.getElementById('totalTests').textContent = TESTS_COUNT;
+        
+        // Инициализация прогресс-бара
+        progressFill.style.width = '0%';
+        
+        // Добавляем стили для виджета прогресса
+        const style = document.createElement('style');
+        style.textContent = `
+            #progressWidget {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: var(--white);
+                padding: 1.5rem;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+                border: 1px solid var(--mineral-red);
+                z-index: 1000;
+                max-width: 300px;
+                animation: slideIn 0.3s ease;
+            }
+
+            .progress-widget-content {
+                position: relative;
+                min-width: 250px;
+            }
+
+            .progress-widget-content h3 {
+                color: var(--mineral-red);
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+            }
+
+            .progress-stats {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 0.95rem;
+            }
+
+            .progress-stats div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.5rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 1px solid var(--stone);
+            }
+
+            .progress-stats div:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+
+            .progress-stats strong {
+                color: var(--mineral-red);
+                font-size: 1.1rem;
+            }
+
+            .close-widget-btn {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                width: 25px;
+                height: 25px;
+                background: var(--mineral-red);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #resetProgressBtn {
+                padding: 0.8rem;
+                background: var(--incorrect) !important;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            #resetProgressBtn:hover {
+                background: #d32f2f !important;
+                transform: translateY(-2px);
+            }
+
+            @keyframes slideIn {
+                from { transform: translateY(100px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>

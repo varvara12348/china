@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О Китае - Культура и история | China Guide</title>
+    <style>
+        /* ===== СБРОС И БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --mineral-red: #B93A32;
+            --terracotta: #C67F59;
+            --charcoal: #2C2C2C;
+            --stone: #D8D2C5;
+            --sand: #F5F1E8;
+            --white: #FFFFFF;
+            --gradient: linear-gradient(135deg, var(--mineral-red) 0%, var(--terracotta) 100%);
+            --shadow: 0 10px 30px rgba(185, 58, 50, 0.15);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--charcoal);
+            background: var(--sand);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(216, 210, 197, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-bottom-color: var(--mineral-red);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--mineral-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 600;
+            border: 2px solid var(--terracotta);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--mineral-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--mineral-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--mineral-red);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Заголовок страницы */
+        .page-header {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, 
+                rgba(185, 58, 50, 0.05) 0%, 
+                rgba(198, 127, 89, 0.05) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(185, 58, 50, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(198, 127, 89, 0.03) 0%, transparent 50%);
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title span {
+            color: var(--mineral-red);
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+        .content-section {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        .culture-card {
+            background: var(--sand);
+            padding: 3rem;
+            border-radius: var(--radius);
+            border: 1px solid rgba(216, 210, 197, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--mineral-red);
+        }
+
+        .culture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--mineral-red);
+        }
+
+        .culture-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(185, 58, 50, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            color: var(--mineral-red);
+            font-size: 2rem;
+        }
+
+        .culture-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        .culture-card p {
+            color: var(--charcoal);
+            opacity: 0.7;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== ХРОНОЛОГИЯ ===== */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--mineral-red);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--white);
+            border: 3px solid var(--mineral-red);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -50px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -50px;
+        }
+
+        .timeline-content {
+            background: var(--sand);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid rgba(216, 210, 197, 0.5);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-year {
+            color: var(--mineral-red);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        /* ===== ГЕОГРАФИЯ ===== */
+        .geography-section {
+            padding: 6rem 0;
+            background: var(--sand);
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .region-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(216, 210, 197, 0.5);
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(185, 58, 50, 0.1);
+        }
+
+        .region-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .region-content {
+            padding: 2rem;
+        }
+
+        .region-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+            font-weight: 700;
+        }
+
+        .region-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .region-features li {
+            padding: 0.5rem 0;
+            color: var(--charcoal);
+            opacity: 0.7;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .region-features li::before {
+            content: '•';
+            color: var(--mineral-red);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+
+        /* ===== ЦИТАТЫ ===== */
+        .quotes-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, 
+                rgba(185, 58, 50, 0.05) 0%, 
+                rgba(198, 127, 89, 0.05) 100%);
+            text-align: center;
+        }
+
+        .quote-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            position: relative;
+            padding: 0 3rem;
+        }
+
+        .quote::before,
+        .quote::after {
+            content: '"';
+            color: var(--mineral-red);
+            font-size: 4rem;
+            position: absolute;
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+
+        .quote::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .quote::after {
+            bottom: -40px;
+            right: 0;
+        }
+
+        .quote-author {
+            color: var(--mineral-red);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Футер */
+        .footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            border-top: 3px solid var(--mineral-red);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo .logo-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            border: 2px solid var(--terracotta);
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .footer-logo-subtext {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--mineral-red);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .footer-links a:hover {
+            color: var(--terracotta);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--mineral-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: calc(100% - 80px);
+                left: 80px !important;
+            }
+            
+            .timeline-dot {
+                left: -60px !important;
+                right: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .page-header {
+                padding: 140px 0 60px;
+            }
+            
+            .page-title {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .culture-grid,
+            .regions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">中</div>
+                    <div>
+                        <div class="logo-text">China Guide</div>
+                        <div class="logo-subtext">Путеводитель по Поднебесной</div>
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                 <ul class="nav-links">
+                        <li><a href="index.html" class="nav-link">Главная</a></li>
+                        <li><a href="about-china.html" class="nav-link active">О Китае</a></li>
+                        <li><a href="knowledge.html" class="nav-link">База знаний</a></li>
+                        <li><a href="tests.html" class="nav-link">Тесты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">О <span>Китае</span></h1>
+            <p class="page-subtitle">
+                Погрузитесь в тысячелетнюю историю, богатую культуру и современные 
+                реалии одной из древнейших цивилизаций мира.
+            </p>
+        </div>
+    </section>
+
+    <!-- Культура и традиции -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Культура и традиции</h2>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <div class="culture-icon">🏮</div>
+                    <h3>Философия и религия</h3>
+                    <p>
+                        Конфуцианство, даосизм и буддизм — три столпа китайской философии, 
+                        которые формируют мировоззрение и ценности нации на протяжении тысячелетий.
+                    </p>
+                </div>
+                
+                <div class="culture-card">
+                    <div class="culture-icon">🎭</div>
+                    <h3>Искусство и ремесла</h3>
+                    <p>
+                        Китайская каллиграфия, живопись, опера и традиционные ремесла 
+                        отражают глубину культурного наследия и мастерство китайских умельцев.
+                    </p>
+                </div>
+                
+                <div class="culture-card">
+                    <div class="culture-icon">🍜</div>
+                    <h3>Кулинарные традиции</h3>
+                    <p>
+                        Восемь великих кухонь Китая, философия инь-ян в питании 
+                        и искусство чайной церемонии — важнейшие аспекты китайской культуры.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Хронология -->
+            <h2 class="section-title" style="margin-top: 5rem;">Исторические периоды</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1600–1046 гг. до н.э.</div>
+                        <h4>Династия Шан</h4>
+                        <p>Первая исторически подтвержденная династия, создание бронзовых 
+                        изделий, развитие письменности на костях.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">1046–256 гг. до н.э.</div>
+                        <h4>Династия Чжоу</h4>
+                        <p>Золотой век китайской философии, появление конфуцианства и даосизма, 
+                        развитие системы феодализма.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">221–206 гг. до н.э.</div>
+                        <h4>Династия Цинь</h4>
+                        <p>Объединение Китая, создание Великой стены, стандартизация письменности 
+                        и системы мер.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">206 г. до н.э. – 220 г. н.э.</div>
+                        <h4>Династия Хань</h4>
+                        <p>Расцвет культуры и науки, развитие Шелкового пути, изобретение бумаги 
+                        и сейсмографа.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- География и регионы -->
+    <section class="geography-section">
+        <div class="container">
+            <h2 class="section-title">Регионы Китая</h2>
+            <div class="regions-grid">
+                <div class="region-card">
+                    <img src="https://cs14.pikabu.ru/post_img/2023/06/23/6/og_og_1687512399276946178.jpg" 
+                         alt="Северный Китай" class="region-image">
+                    <div class="region-content">
+                        <h3>Северный Китай</h3>
+                        <p>Пекин, Тяньцзинь, Хэбэй. Исторический центр с Великой стеной 
+                        и Запретным городом.</p>
+                        <ul class="region-features">
+                            <li>Столичный регион</li>
+                            <li>Исторические памятники</li>
+                            <li>Северная кухня</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="region-card">
+                    <img src="https://spb-foto.ru/foto/images/puteshestviya/puteshestvie_v_yugo-zapadney_kitay_v_marte-aprele_2010_goda./pingan_guilin_guangxi_china.jpg" 
+                         alt="Восточный Китай" class="region-image">
+                    <div class="region-content">
+                        <h3>Восточный Китай</h3>
+                        <p>Шанхай, Цзянсу, Чжэцзян. Экономический дракон с развитой 
+                        промышленностью и портами.</p>
+                        <ul class="region-features">
+                            <li>Экономический центр</li>
+                            <li>Модернизация</li>
+                            <li>Международные связи</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="region-card">
+                    <img src="https://i.pinimg.com/originals/19/04/4c/19044ca9181c171dc0196a9177d6fab4.jpg" 
+                         alt="Южный Китай" class="region-image">
+                    <div class="region-content">
+                        <h3>Южный Китай</h3>
+                        <p>Гуандун, Гуанси, Хайнань. Тропический регион с особой кухней 
+                        и традициями.</p>
+                        <ul class="region-features">
+                            <li>Торговые традиции</li>
+                            <li>Кантонская кухня</li>
+                            <li>Морское побережье</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цитаты -->
+    <section class="quotes-section">
+        <div class="container">
+            <div class="quote-slider">
+                <div class="quote">
+                    Путешествие в тысячу ли начинается с первого шага
+                </div>
+                <div class="quote-author">— Лао-цзы</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="logo-icon">中</div>
+                            <div class="footer-logo-text">China Guide</div>
+                        </div>
+                        <p class="footer-logo-subtext">
+                            Авторитетный образовательный проект по изучению 
+                            китайской культуры, истории и современности.
+                        </p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">fb</a>
+                        <a href="#" class="social-link">yt</a>
+                        <a href="#" class="social-link">tg</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about-china.html">О Китае</a></li>
+                        <li><a href="knowledge.html">База знаний</a></li>
+                        <li><a href="tests.html">Тестирование</a></li>
+                        <li><a href="about-project.html">О проекте</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@chinaguide.ru">info@chinaguide.ru</a></li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li>Москва, Китайгородский пр., 7</li>
+                        <li>Пн-Пт, 9:00-18:00</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Партнеры</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Институт Конфуция</a></li>
+                        <li><a href="#">МГУ им. Ломоносова</a></li>
+                        <li><a href="#">Китайский культурный центр</a></li>
+                        <li><a href="#">Академия наук РФ</a></li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="footer-bottom">
+                <p>© 2025 China Guide. Все материалы защищены авторским правом.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Использование материалов возможно только с письменного разрешения редакции.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Шапка при скролле
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Анимация появления при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Анимируем все карточки
+        document.querySelectorAll('.culture-card, .region-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Активное меню при скролле
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const scrollPosition = window.scrollY + 150;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current) || 
+                   (current === '' && link.getAttribute('href') === 'about-china.html')) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Смена цитат
+        const quotes = [
+            {
+                text: "Путешествие в тысячу ли начинается с первого шага",
+                author: "Лао-цзы"
+            },
+            {
+                text: "Учение без размышления бесполезно, размышление без учения опасно",
+                author: "Конфуций"
+            },
+            {
+                text: "Знающий других умен, знающий себя просвещен",
+                author: "Лао-цзы"
+            }
+        ];
+
+        let currentQuoteIndex = 0;
+        const quoteElement = document.querySelector('.quote');
+        const authorElement = document.querySelector('.quote-author');
+
+        function changeQuote() {
+            quoteElement.style.opacity = '0';
+            authorElement.style.opacity = '0';
+
+            setTimeout(() => {
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+                quoteElement.textContent = quotes[currentQuoteIndex].text;
+                authorElement.textContent = `— ${quotes[currentQuoteIndex].author}`;
+
+                quoteElement.style.opacity = '1';
+                authorElement.style.opacity = '1';
+            }, 500);
+        }
+
+        // Меняем цитату каждые 10 секунд
+        if (quoteElement && authorElement) {
+            setInterval(changeQuote, 10000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний о Китае | China Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --mineral-red: #B93A32;
+            --terracotta: #C67F59;
+            --charcoal: #2C2C2C;
+            --stone: #D8D2C5;
+            --sand: #F5F1E8;
+            --white: #FFFFFF;
+            --gradient: linear-gradient(135deg, var(--mineral-red) 0%, var(--terracotta) 100%);
+            --shadow: 0 10px 30px rgba(185, 58, 50, 0.15);
+            --radius: 12px;
+        }
+
+         body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--charcoal);
+            background: var(--sand);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(216, 210, 197, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-bottom-color: var(--mineral-red);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: var(--mineral-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 600;
+            border: 2px solid var(--terracotta);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid rgba(185, 58, 50, 0.2);
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+        /* Навигация */
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--mineral-red);
+            color: var(--white);
+            border: 1px solid var(--mineral-red);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(185, 58, 50, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--mineral-red);
+            border: 1px solid var(--mineral-red);
+        }
+
+        .btn-outline:hover {
+            background: rgba(185, 58, 50, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--mineral-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--mineral-red);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--mineral-red);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Заголовок страницы */
+        .page-header {
+            padding: 160px 0 60px;
+            background: linear-gradient(135deg, 
+                rgba(185, 58, 50, 0.05) 0%, 
+                rgba(198, 127, 89, 0.05) 100%);
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title span {
+            color: var(--mineral-red);
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* НОВЫЙ ДИЗАЙН КАТЕГОРИЙ - ГОРИЗОНТАЛЬНЫЙ */
+        .categories {
+            padding: 2rem 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--stone);
+        }
+
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .category-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 120px;
+            white-space: nowrap;
+        }
+
+        .category-tab::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--mineral-red);
+            transition: width 0.3s ease;
+        }
+
+        .category-tab:hover::after {
+            width: 80%;
+        }
+
+        .category-tab.active::after {
+            width: 100%;
+        }
+
+        .category-tab.active {
+            color: var(--mineral-red);
+        }
+
+        .category-tab:hover {
+            color: var(--mineral-red);
+            transform: translateY(-2px);
+        }
+
+        .category-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab.active .category-icon {
+            transform: scale(1.1);
+        }
+
+        .category-tab h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .category-tab p {
+            font-size: 0.8rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        /* Статьи */
+        .articles-section {
+            padding: 3rem 0;
+            background: var(--sand);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .articles-grid.loading {
+            opacity: 0.5;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: 1px solid var(--stone);
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+            border-color: var(--mineral-red);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(185, 58, 50, 0.1);
+            color: var(--mineral-red);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            align-self: flex-start;
+        }
+
+        .article-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        .article-content p {
+            color: var(--charcoal);
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--stone);
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            opacity: 0.6;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Поиск */
+        .search-section {
+            padding: 3rem 0;
+            background: var(--white);
+            border-top: 1px solid var(--stone);
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3rem 1.2rem 1.5rem;
+            border: 1px solid var(--stone);
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: var(--sand);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--mineral-red);
+            box-shadow: 0 0 0 3px rgba(185, 58, 50, 0.1);
+            background: var(--white);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--mineral-red);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .search-button:hover {
+            background: var(--terracotta);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Футер */
+        .footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            border-top: 3px solid var(--mineral-red);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .footer-logo .logo-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            border: 2px solid var(--terracotta);
+        }
+
+        .footer-logo-text {
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .footer-logo-subtext {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--mineral-red);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .footer-links a:hover {
+            color: var(--terracotta);
+            padding-left: 5px;
+        }
+
+         .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--mineral-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+         /* Модальное окно для статьи */
+        .article-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: var(--white);
+            max-width: 900px;
+            margin: 2rem auto;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.4s ease;
+            overflow: hidden;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+            border: none;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--mineral-red);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(185, 58, 50, 0.1);
+            color: var(--mineral-red);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+        }
+
+        .modal-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--sand);
+            border-radius: var(--radius);
+            border: 1px solid var(--stone);
+        }
+
+        .modal-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+        }
+
+        .modal-stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--mineral-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-stat-label {
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--stone);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 1rem auto;
+            }
+    
+            .modal-body {
+                padding: 2rem;
+            }
+    
+            .modal-title {
+                font-size: 2rem;
+            }
+    
+            .modal-image {
+                height: 250px;
+            }
+    
+            .modal-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .categories-nav {
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+
+            .category-tab {
+                min-width: 100px;
+                padding: 1rem 1.5rem;
+            }
+
+            .category-tab h3 {
+                font-size: 0.9rem;
+            }
+
+            .category-tab p {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">中</div>
+                    <div>
+                        <div class="logo-text">China Guide</div>
+                        <div class="logo-subtext">Путеводитель по Поднебесной</div>
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="nav-link">Главная</a></li>
+                        <li><a href="about-china.html" class="nav-link">О Китае</a></li>
+                        <li><a href="knowledge.html" class="nav-link active">База знаний</a></li>
+                        <li><a href="tests.html" class="nav-link">Тесты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Заголовок страницы -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">База <span>знаний</span></h1>
+            <p class="page-subtitle">
+                Структурированная коллекция материалов по всем аспектам китайской культуры, 
+                истории и современности
+            </p>
+        </div>
+    </section>
+
+    <!-- Поиск -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Поиск материалов..." id="searchInput">
+                <button class="search-button" id="searchButton">Найти</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Категории - НОВЫЙ ДИЗАЙН -->
+    <section class="categories">
+        <div class="container">
+            <div class="categories-nav" id="categoriesNav">
+                <button class="category-tab active" data-category="all">
+                    <div class="category-icon">🏛️</div>
+                    <h3>Все статьи</h3>
+                    <p>Все категории</p>
+                </button>
+                <button class="category-tab" data-category="История">
+                    <div class="category-icon">🏛️</div>
+                    <h3>История</h3>
+                    <p>Династии и империи</p>
+                </button>
+                <button class="category-tab" data-category="Культура">
+                    <div class="category-icon">🎭</div>
+                    <h3>Культура</h3>
+                    <p>Традиции и искусство</p>
+                </button>
+                <button class="category-tab" data-category="Кухня">
+                    <div class="category-icon">🍜</div>
+                    <h3>Кухня</h3>
+                    <p>Кулинарные традиции</p>
+                </button>
+                <button class="category-tab" data-category="География">
+                    <div class="category-icon">🗺️</div>
+                    <h3>География</h3>
+                    <p>Регионы и города</p>
+                </button>
+                <button class="category-tab" data-category="Бизнес">
+                    <div class="category-icon">💼</div>
+                    <h3>Бизнес</h3>
+                    <p>Экономика и этикет</p>
+                </button>
+                <button class="category-tab" data-category="Язык">
+                    <div class="category-icon">🎓</div>
+                    <h3>Язык</h3>
+                    <p>Китайский язык</p>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статьи -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Статьи будут загружены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="logo-icon">中</div>
+                            <div class="footer-logo-text">China Guide</div>
+                        </div>
+                        <p class="footer-logo-subtext">
+                            Авторитетный образовательный проект по изучению 
+                            китайской культуры, истории и современности.
+                        </p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">fb</a>
+                        <a href="#" class="social-link">yt</a>
+                        <a href="#" class="social-link">tg</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about-china.html">О Китае</a></li>
+                        <li><a href="knowledge.html">База знаний</a></li>
+                        <li><a href="tests.html">Тестирование</a></li>
+                        <li><a href="about-project.html">О проекте</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@chinaguide.ru">info@chinaguide.ru</a></li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li>Москва, Китайгородский пр., 7</li>
+                        <li>Пн-Пт, 9:00-18:00</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Партнеры</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Институт Конфуция</a></li>
+                        <li><a href="#">МГУ им. Ломоносова</a></li>
+                        <li><a href="#">Китайский культурный центр</a></li>
+                        <li><a href="#">Академия наук РФ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 China Guide. Все материалы защищены авторским правом.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                    Использование материалов возможно только с письменного разрешения редакции.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для подробной информации о статье -->
+    <div id="articleModal" class="article-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="Статья" class="modal-image">
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span id="modalCategory" class="modal-category">История</span>
+                <h2 id="modalTitle" class="modal-title">Великая Китайская стена: история строительства</h2>
+                <p id="modalSubtitle" class="modal-subtitle">Подробное исследование одного из величайших чудес света</p>
+                
+                <div class="modal-text" id="modalContent">
+                    <!-- Контент будет загружаться динамически -->
+                </div>
+                
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <div class="modal-stat-number" id="modalReadTime">20 мин</div>
+                        <div class="modal-stat-label">Время чтения</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-number" id="modalReaders">1.2К</div>
+                        <div class="modal-stat-label">Прочитали</div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-number" id="modalDate">2024</div>
+                        <div class="modal-stat-label">Год публикации</div>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="printArticle()">
+                        <span style="margin-right: 8px;">🖨️</span> Распечатать
+                    </button>
+                    <button class="btn btn-outline" onclick="shareArticle()">
+                        <span style="margin-right: 8px;">📤</span> Поделиться
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные для статей
+        const articlesData = [
+            {
+                id: 1,
+                title: "Великая Китайская стена: история строительства",
+                category: "История",
+                image: "https://avatars.mds.yandex.net/i?id=e854d89a2cafc4306cf2cdc7ff6d7469_l-5480282-images-thumbs&n=13",
+                subtitle: "Как строилась самая длинная стена в мире: от первой династии до наших дней",
+                description: "Технологии, цели и значение этого грандиозного сооружения. Подробный анализ исторических периодов строительства.",
+                content: `
+                    <p>Великая Китайская стена — одно из самых грандиозных сооружений в истории человечества, символ китайской цивилизации и инженерного гения.</p>
+                    
+                    <h3>Начало строительства</h3>
+                    <p>Первые участки стены были построены еще в VII веке до н.э. во время периода Воюющих царств. Каждое царство строило свои укрепления для защиты от соседей и кочевников с севера.</p>
+                    
+                    <h3>Объединение и расширение</h3>
+                    <p>После объединения Китая под властью императора Цинь Шихуанди (221-206 до н.э.) началось соединение разрозненных участков в единую оборонительную систему. На этих работах было задействовано около миллиона человек — солдаты, крестьяне и заключенные.</p>
+                    
+                    <h3>Технологии строительства</h3>
+                    <p>Стена строилась из различных материалов в зависимости от региона: каменные блоки в горных районах, утрамбованная земля в степях, кирпич и раствор в поздние периоды. Средняя высота стены составляла 6-7 метров, ширина — 4-5 метров.</p>
+                    
+                    <h3>Династия Мин (1368-1644)</h3>
+                    <p>Период наибольшего расцвета строительства. Было построено около 6 000 км стены с использованием кирпича и камня. Добавились сторожевые башни, казармы и склады.</p>
+                    
+                    <h3>Современное состояние</h3>
+                    <p>Общая длина всех участков стены составляет около 21 196 км. Около 30% стены сохранилось хорошо, 40% — в удовлетворительном состоянии, 30% — почти разрушено.</p>
+                `,
+                readTime: "20 мин",
+                readers: "1.2K",
+                date: "2023",
+                author: "Проф. Ли Вэй"
+            },
+            {
+                id: 2,
+                title: "8 великих кухонь Китая",
+                category: "Кухня",
+                image: "https://chinaexploration.com/uploads/allimg/180211/162F51949-0.jpg",
+                subtitle: "Подробный гид по региональным кулинарным традициям",
+                description: "От сычуаньской остроты до кантонской изысканности — узнайте различия и особенности каждой кухни.",
+                content: `
+                    <p>Китайская кухня — не единое целое, а собрание разнообразных региональных традиций, каждая со своими уникальными особенностями.</p>
+                    
+                    <h3>Сычуаньская кухня</h3>
+                    <p>Известна своей остротой и использованием сычуаньского перца, который создает ощущение онемения. Популярные блюда: гунбао цзидин (курица с арахисом), мапо тофу.</p>
+                    
+                    <h3>Кантонская кухня</h3>
+                    <p>Самый известный за пределами Китая стиль. Отличается свежими ингредиентами и легкой обработкой. Знаменита димсамами и жареными блюдами вок.</p>
+                    
+                    <h3>Шаньдунская кухня</h3>
+                    <p>Одна из древнейших, оказала влияние на пекинскую кухню. Известна морепродуктами, супами и тушеными блюдами.</p>
+                    
+                    <h3>Цзянсуская кухня</h3>
+                    <p>Изысканная и тщательно приготовленная, с акцентом на текстуру и внешний вид. Славится блюдами из пресноводной рыбы.</p>
+                    
+                    <h3>Чжэцзянская кухня</h3>
+                    <p>Нежная и свежая, с минимальным использованием масла и приправ. Особенность — сезонные овощи и морепродукты.</p>
+                    
+                    <h3>Фуцзяньская кухня</h3>
+                    <p>Известна супами и блюдами из морепродуктов, часто с добавлением вина для аромата.</p>
+                    
+                    <h3>Хунаньская кухня</h3>
+                    <p>Острая, но без онемения как в сычуаньской. Обильное использование свежего перца, чеснока и лука.</p>
+                    
+                    <h3>Аньхойская кухня</h3>
+                    <p>Простая деревенская кухня с акцентом на дикие продукты: грибы, травы, дичь.</p>
+                `,
+                readTime: "15 мин",
+                readers: "890",
+                date: "2023",
+                author: "Шеф Чжан Ли"
+            },
+            {
+                id: 3,
+                title: "Китайский Новый год: традиции и символы",
+                category: "Культура",
+                image: "https://files.1mi.media/0f036503dc2d0fcf05421d324615e44dc1c40e52/c:1200:675:nowe:0:0/c712028e9eb5f53e4b93245966d746c564ab8c243b129dfc7a2bcfac4eb0.webp",
+                subtitle: "Как отмечают главный праздник в Китае",
+                description: "Значение цветов, традиционные блюда, ритуалы и современные традиции празднования.",
+                content: `
+                    <p>Китайский Новый год, также известный как Праздник Весны, — самый важный традиционный праздник в Китае, отмечаемый в течение 15 дней.</p>
+                    
+                    <h3>Подготовка к празднику</h3>
+                    <p>За неделю до Нового года начинается тщательная уборка дома, символизирующая избавление от старого и привлечение удачи. Покупаются новые одежды, особенно красного цвета.</p>
+                    
+                    <h3>Канун Нового года</h3>
+                    <p>Семейный ужин воссоединения — самый важный прием пищи в году. На столе обязательно присутствуют рыба (символ изобилия), пельмени (формой напоминающие древние золотые слитки) и нянгао (сладкий рисовый пирог).</p>
+                    
+                    <h3>Праздничные традиции</h3>
+                    <p>В полночь запускают фейерверки, чтобы отпугнуть злых духов. Детям дарят красные конверты с деньгами (хунбао). Обязательны визиты к родственникам и друзьям.</p>
+                    
+                    <h3>Символы и их значения</h3>
+                    <p>• Красный цвет — защита от злых духов<br>
+                    • Драконы и львы — сила и удача<br>
+                    • Мандарины и апельсины — богатство<br>
+                    • Фонарики — светлое будущее<br>
+                    • Иероглиф 福 (фу) — счастье</p>
+                    
+                    <h3>Фестиваль фонарей</h3>
+                    <p>На 15-й день праздника проходит Фестиваль фонарей, завершающий новогодние торжества. Люди выходят на улицы с фонарями, едят юаньсяо (сладкие рисовые шарики) и любуются фейерверками.</p>
+                `,
+                readTime: "12 мин",
+                readers: "2.1K",
+                date: "2023",
+                author: "Др. Ван Мэйли"
+            },
+            {
+                id: 4,
+                title: "Тибет: крыша мира",
+                category: "География",
+                image: "https://avatars.mds.yandex.net/i?id=d54a83e41cc4b1f8bc9d387fa016ffef_l-5350081-images-thumbs&n=13",
+                subtitle: "Уникальная культура, религия и природа высокогорного региона",
+                description: "История тибетского буддизма и особенности жизни на высоте. Исследование уникальной экосистемы.",
+                content: `
+                    <p>Тибетское нагорье, известное как «Крыша мира», является самым высоким и обширным плато на Земле со средней высотой 4500 метров над уровнем моря.</p>
+                    
+                    <h3>Географические особенности</h3>
+                    <p>Тибет занимает площадь около 2,5 миллионов км². Здесь находятся истоки крупнейших азиатских рек: Янцзы, Хуанхэ, Меконг, Салуин, Брахмапутра и Инд.</p>
+                    
+                    <h3>Климат и экосистема</h3>
+                    <p>Суровый высокогорный климат с низким содержанием кислорода. Уникальная флора и фауна, включая тибетских антилоп, диких яков и снежных барсов.</p>
+                    
+                    <h3>Тибетский буддизм</h3>
+                    <p>Особая форма буддизма ваджраяны, развивавшаяся в изоляции. Известна своими сложными ритуалами, мантрами, мандалами и институтом перерождающихся лам (тулку).</p>
+                    
+                    <h3>Культура и традиции</h3>
+                    <p>• Як — основа тибетской экономики (молоко, мясо, шерсть, транспорт)<br>
+                    • Цам — ритуальные танцы в масках<br>
+                    • Тханка — религиозная живопись на свитках<br>
+                    • Молитвенные флажки и молитвенные колеса</p>
+                    
+                    <h3>Архитектура</h3>
+                    <p>Дворцовая крепость Потала в Лхасе — выдающийся пример тибетской архитектуры, бывшая зимняя резиденция Далай-лам. Монастыри часто строятся на труднодоступных скалах.</p>
+                    
+                    <h3>Современный Тибет</h3>
+                    <p>С 1950-х годов регион переживает значительные изменения: строительство инфраструктуры, развитие образования и здравоохранения, рост туризма.</p>
+                `,
+                readTime: "25 мин",
+                readers: "540",
+                date: "2023",
+                author: "Проф. Церинг Дордже"
+            },
+            {
+                id: 5,
+                title: "Китайский деловой этикет",
+                category: "Бизнес",
+                image: "https://beppegrillo.it/wp-content/uploads/2019/04/JAPAN.jpg",
+                subtitle: "Как правильно вести переговоры с китайскими партнерами",
+                description: "Основы делового общения в Китае. Протокол встреч, переговоров и подарков.",
+                content: `
+                    <p>Успех в бизнесе с Китаем во многом зависит от понимания местных культурных норм и делового этикета.</p>
+                    
+                    <h3>Первая встреча и представление</h3>
+                    <p>• Приветствуйте сначала самого старшего по должности<br>
+                    • Используйте официальные обращения: фамилия + должность (например, «Директор Ван»)<br>
+                    • Визитные карточки передавайте и принимайте двумя руками, внимательно изучите полученную карточку<br>
+                    • Легкий поклон в дополнение к рукопожатию</p>
+                    
+                    <h3>Деловые переговоры</h3>
+                    <p>• Китайцы предпочитают длительные переговоры для установления доверия<br>
+                    • Прямой конфронтации избегают, важна «сохранение лица»<br>
+                    • Решения часто принимаются коллективно, требуется терпение<br>
+                    • «Нет» редко произносится прямо, вместо этого «нам нужно подумать»</p>
+                    
+                    <h3>Деловые подарки</h3>
+                    <p>• Подарки дарят в конце встречи<br>
+                    • Избегайте часов, носовых платков, ножниц и зеленых головных уборов<br>
+                    • Хорошие варианты: качественный алкоголь, чай, изделия ручной работы с вашей страны<br>
+                    • Подарки обычно скромно отказываются 2-3 раза перед принятием</p>
+                    
+                    <h3>Деловые обеды</h3>
+                    <p>• Место почета — напротив входа<br>
+                    • Хозяин заказывает блюда для всех<br>
+                    • Не начинайте есть первым, дождитесь тоста хозяина<br>
+                    • Палочки никогда не оставляйте вертикально в рисе</p>
+                    
+                    <h3>Важные принципы</h3>
+                    <p>• Гуаньси (关系) — система связей и взаимных обязательств<br>
+                    • Мяньцзы (面子) — сохранение лица, уважение репутации<br>
+                    • Хэсе (和气) — гармония и избегание конфликтов</p>
+                `,
+                readTime: "18 мин",
+                readers: "1.5K",
+                date: "2023",
+                author: "Бизнес-консультант Лю Цзянь"
+            },
+            {
+                id: 6,
+                title: "Основы китайской письменности",
+                category: "Язык",
+                image: "https://api.vmuzey.com/static/event/E967564663326/6ef706e3bf4bd8dd-w820-h440.jpg",
+                subtitle: "Иероглифы, тоны и грамматика — с чего начать изучение",
+                description: "Подробное руководство по изучению китайского языка. От иероглифов до произношения.",
+                content: `
+                    <p>Китайская письменность — одна из древнейших в мире, используемая непрерывно более 3000 лет.</p>
+                    
+                    <h3>Иероглифы: структура и эволюция</h3>
+                    <p>Современные иероглифы прошли эволюцию от пиктограмм (простых рисунков) до сложных символов. Существует 6 категорий иероглифов:<br>
+                    1. Пиктограммы (изображения предметов)<br>
+                    2. Идеограммы (абстрактные понятия)<br>
+                    3. Составные идеограммы<br>
+                    4. Фоно-идеограммы (самая многочисленная группа)<br>
+                    5. Заимствованные<br>
+                    6. Производные</p>
+                    
+                    <h3>Ключи (радикалы)</h3>
+                    <p>214 ключей — основные компоненты иероглифов, помогающие в поиске и понимании значений. Каждый иероглиф содержит один ключ, указывающий на общую категорию значения.</p>
+                    
+                    <h3>Черты и порядок написания</h3>
+                    <p>8 основных типов черт, которые пишутся в строгом порядке:<br>
+                    1. Слева направо<br>
+                    2. Сверху вниз<br>
+                    3. Горизонтальные перед вертикальными<br>
+                    4. Сначала внешний контур, затем внутренние части<br>
+                    5. Сначала середина, затем стороны<br>
+                    6. Сначала черта, закрывающая иероглиф</p>
+                    
+                    <h3>Тоны в китайском языке</h3>
+                    <p>Путунхуа имеет 4 основных тона + нейтральный:<br>
+                    1. Ровный высокий (mā — мама)<br>
+                    2. Восходящий (má — конопля)<br>
+                    3. Низкий с падением и подъемом (mǎ — лошадь)<br>
+                    4. Падающий (mà — ругать)<br>
+                    5. Нейтральный (легкий и короткий)</p>
+                    
+                    <h3>Пиньинь — система романизации</h3>
+                    <p>Латинская транскрипция для обозначения произношения, обязательная для изучения. Помогает печатать на компьютере и учить правильное произношение.</p>
+                    
+                    <h3>С чего начать изучение</h3>
+                    <p>1. Освоить пиньинь и тоны<br>
+                    2. Изучить основные ключи<br>
+                    3. Практиковать базовые иероглифы (100 самых частотных)<br>
+                    4. Учить слова, а не отдельные иероглифы<br>
+                    5. Постоянная практика письма и чтения</p>
+                `,
+                readTime: "30 мин",
+                readers: "3.2K",
+                date: "2023",
+                author: "Лингвист Чэнь Юй"
+            }
+        ];
+
+        // Глобальные переменные для фильтрации
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+        let filteredArticles = [...articlesData];
+
+        // Функция для отображения статей
+        function renderArticles() {
+            const articlesGrid = document.getElementById('articlesGrid');
+            
+            // Показываем индикатор загрузки
+            articlesGrid.classList.add('loading');
+            
+            setTimeout(() => {
+                // Фильтруем статьи по категории и поиску
+                filteredArticles = articlesData.filter(article => {
+                    const matchesCategory = currentCategory === 'all' || article.category === currentCategory;
+                    const matchesSearch = !currentSearchQuery || 
+                        article.title.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                        article.description.toLowerCase().includes(currentSearchQuery.toLowerCase()) ||
+                        article.category.toLowerCase().includes(currentSearchQuery.toLowerCase());
+                    
+                    return matchesCategory && matchesSearch;
+                });
+                
+                // Очищаем сетку
+                articlesGrid.innerHTML = '';
+                
+                // Если нет результатов
+                if (filteredArticles.length === 0) {
+                    articlesGrid.innerHTML = `
+                        <div class="no-results">
+                            <div class="no-results-icon">🔍</div>
+                            <h3>Ничего не найдено</h3>
+                            <p>Попробуйте изменить запрос или выбрать другую категорию</p>
+                        </div>
+                    `;
+                    articlesGrid.classList.remove('loading');
+                    return;
+                }
+                
+                // Создаем карточки статей
+                filteredArticles.forEach(article => {
+                    const articleCard = document.createElement('div');
+                    articleCard.className = 'article-card';
+                    articleCard.dataset.id = article.id;
+                    
+                    // Выделяем найденный текст в заголовке и описании
+                    let titleHtml = article.title;
+                    let descriptionHtml = article.description;
+                    
+                    if (currentSearchQuery) {
+                        const regex = new RegExp(`(${currentSearchQuery})`, 'gi');
+                        titleHtml = article.title.replace(regex, '<span class="highlight">$1</span>');
+                        descriptionHtml = article.description.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                    
+                    articleCard.innerHTML = `
+                        <img src="${article.image}" alt="${article.title}" class="article-image">
+                        <div class="article-content">
+                            <span class="article-category">${article.category}</span>
+                            <h3>${titleHtml}</h3>
+                            <p>${descriptionHtml}</p>
+                            <div class="article-meta">
+                                <span>${article.readTime} чтения</span>
+                                <span>Прочитали: ${article.readers}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Добавляем обработчик клика для открытия модального окна
+                    articleCard.addEventListener('click', () => openArticleModal(article.id));
+                    
+                    articlesGrid.appendChild(articleCard);
+                });
+                
+                articlesGrid.classList.remove('loading');
+            }, 300); // Небольшая задержка для плавности
+        }
+
+        // Функция для обработки поиска
+        function handleSearch() {
+            const searchInput = document.getElementById('searchInput');
+            currentSearchQuery = searchInput.value.trim();
+            
+            // Обновляем активную категорию на "Все"
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector('.category-tab[data-category="all"]').classList.add('active');
+            currentCategory = 'all';
+            
+            renderArticles();
+        }
+
+        // Функция для обработки выбора категории
+        function handleCategorySelect(category) {
+            currentCategory = category;
+            currentSearchQuery = ''; // Сбрасываем поиск при выборе категории
+            
+            // Обновляем активную вкладку
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.category === category) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Сбрасываем поле поиска
+            document.getElementById('searchInput').value = '';
+            
+            renderArticles();
+        }
+
+        // Функция открытия модального окна
+        function openArticleModal(articleId) {
+            const article = articlesData.find(a => a.id === articleId);
+            if (!article) return;
+            
+            // Заполняем модальное окно
+            document.getElementById('modalImage').src = article.image;
+            document.getElementById('modalCategory').textContent = article.category;
+            document.getElementById('modalTitle').textContent = article.title;
+            document.getElementById('modalSubtitle').textContent = article.subtitle;
+            document.getElementById('modalContent').innerHTML = article.content;
+            document.getElementById('modalReadTime').textContent = article.readTime;
+            document.getElementById('modalReaders').textContent = article.readers;
+            document.getElementById('modalDate').textContent = article.date;
+            
+            // Показываем модальное окно
+            document.getElementById('articleModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Функция закрытия модального окна
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Функция для печати статьи
+        function printArticle() {
+            window.print();
+        }
+
+        // Функция для общего доступа
+        function shareArticle() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.getElementById('modalTitle').textContent,
+                    text: document.getElementById('modalSubtitle').textContent,
+                    url: window.location.href
+                });
+            } else {
+                alert('Скопируйте ссылку для общего доступа: ' + window.location.href);
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализируем отображение статей
+            renderArticles();
+            
+            // Шапка при скролле
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Обработчики для поиска
+            document.getElementById('searchButton').addEventListener('click', handleSearch);
+            
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+            
+            // Обработчики для категорий
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    handleCategorySelect(this.dataset.category);
+                });
+            });
+            
+            // Закрытие модального окна
+            document.querySelector('.modal-close').addEventListener('click', closeArticleModal);
+            
+            document.getElementById('articleModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeArticleModal();
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeArticleModal();
+                }
+            });
+            
+            // Плавная прокрутка для навигации
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
