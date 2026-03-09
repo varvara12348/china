@@ -45,14 +45,14 @@
             width: 100%;
             background: var(--white);
             z-index: 1000;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             border-bottom: 1px solid rgba(216, 210, 197, 0.5);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
 
         .header.scrolled {
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             border-bottom-color: var(--mineral-red);
         }
@@ -61,6 +61,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
@@ -76,15 +78,15 @@
         }
 
         .logo-icon {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             background: var(--mineral-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
             border: 2px solid var(--terracotta);
             position: relative;
@@ -102,14 +104,14 @@
         }
 
         .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--charcoal);
             letter-spacing: -0.5px;
         }
 
         .logo-subtext {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--terracotta);
             font-weight: 400;
             margin-top: 0.2rem;
@@ -119,12 +121,12 @@
         .nav {
             display: flex;
             align-items: center;
-            gap: 3rem;
+            gap: 2rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
@@ -132,7 +134,7 @@
             text-decoration: none;
             color: var(--charcoal);
             font-weight: 500;
-            font-size: 1.1rem;
+            font-size: 1rem;
             position: relative;
             padding: 0.5rem 0;
             transition: all 0.3s ease;
@@ -166,7 +168,43 @@
             width: 100%;
         }
 
-         /* Кнопки */
+        /* ===== ТЕЛЕФОН В ШАПКЕ ===== */
+        .header-phone {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(185, 58, 50, 0.05), rgba(198, 127, 89, 0.05));
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(185, 58, 50, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .header-phone:hover {
+            background: linear-gradient(135deg, rgba(185, 58, 50, 0.1), rgba(198, 127, 89, 0.1));
+            border-color: var(--mineral-red);
+            transform: scale(1.02);
+        }
+
+        .phone-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            color: var(--mineral-red);
+        }
+
+        .phone-number {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .phone-number:hover {
+            color: var(--mineral-red);
+        }
+
+        /* Кнопки */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -211,7 +249,7 @@
             min-height: 90vh;
             display: flex;
             align-items: center;
-            padding-top: 120px;
+            padding-top: 100px;
             position: relative;
             background: linear-gradient(135deg, 
                 rgba(245, 241, 232, 0.9) 0%, 
@@ -242,7 +280,7 @@
         }
 
         .hero-text h1 {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -267,7 +305,7 @@
         }
 
         .hero-text p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--charcoal);
             opacity: 0.8;
             margin-bottom: 2.5rem;
@@ -314,16 +352,16 @@
         }
 
         .features {
-            padding: 8rem 0;
+            padding: 6rem 0;
             background: var(--white);
             position: relative;
         }
 
         .section-title {
             text-align: center;
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 800;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
             color: var(--charcoal);
             position: relative;
         }
@@ -342,13 +380,13 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
         }
 
         .feature-card {
             background: var(--white);
-            padding: 3rem 2.5rem;
+            padding: 2.5rem;
             border-radius: var(--radius);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: all 0.4s ease;
@@ -374,16 +412,16 @@
         }
 
         .feature-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             background: rgba(185, 58, 50, 0.1);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--mineral-red);
-            font-size: 2rem;
+            font-size: 1.8rem;
             transition: all 0.4s ease;
         }
 
@@ -394,8 +432,8 @@
         }
 
         .feature-card h3 {
-            font-size: 1.7rem;
-            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--charcoal);
             font-weight: 700;
         }
@@ -424,7 +462,7 @@
 
         /* ===== МАТЕРИАЛЫ ===== */
         .materials {
-            padding: 8rem 0;
+            padding: 6rem 0;
             background: var(--sand);
             position: relative;
         }
@@ -433,7 +471,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
             gap: 2rem;
         }
@@ -445,7 +483,7 @@
         }
 
         .filter-btn {
-            padding: 0.8rem 2rem;
+            padding: 0.7rem 1.8rem;
             background: transparent;
             border: 1px solid var(--stone);
             border-radius: 6px;
@@ -464,8 +502,8 @@
 
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .material-card {
@@ -485,7 +523,7 @@
 
         .material-image {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
             transition: transform 0.6s ease;
         }
@@ -495,23 +533,23 @@
         }
 
         .material-content {
-            padding: 2.5rem;
+            padding: 2rem;
         }
 
         .material-category {
             display: inline-block;
-            padding: 0.5rem 1.5rem;
+            padding: 0.4rem 1.2rem;
             background: rgba(185, 58, 50, 0.1);
             color: var(--mineral-red);
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .material-content h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
             color: var(--charcoal);
             font-weight: 700;
         }
@@ -520,12 +558,13 @@
             color: var(--charcoal);
             opacity: 0.7;
             margin-bottom: 1.5rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* ===== СТАТИСТИКА ===== */
         .stats {
-            padding: 6rem 0;
+            padding: 5rem 0;
             background: var(--charcoal);
             color: var(--white);
             position: relative;
@@ -546,19 +585,19 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
             position: relative;
             z-index: 1;
         }
 
         .stat-item {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .stat-number {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
             color: var(--mineral-red);
@@ -567,56 +606,56 @@
 
         .stat-item p {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         /* ===== ФУТЕР ===== */
         .footer {
             background: var(--charcoal);
             color: var(--white);
-            padding: 5rem 0 2rem;
+            padding: 4rem 0 2rem;
             border-top: 3px solid var(--mineral-red);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .footer-logo {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .footer-logo .logo-icon {
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            font-size: 1.4rem;
             border: 2px solid var(--terracotta);
         }
 
         .footer-logo-text {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--white);
             font-weight: 700;
         }
 
         .footer-logo-subtext {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .footer-section h4 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
             color: var(--terracotta);
             font-weight: 600;
             position: relative;
-            padding-bottom: 0.8rem;
+            padding-bottom: 0.6rem;
         }
 
         .footer-section h4::after {
@@ -624,7 +663,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 40px;
+            width: 35px;
             height: 2px;
             background: var(--mineral-red);
         }
@@ -634,7 +673,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
         }
 
         .footer-links a {
@@ -642,6 +681,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 400;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
@@ -652,12 +692,12 @@
         .social-links {
             display: flex;
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
 
         .social-link {
-            width: 42px;
-            height: 42px;
+            width: 38px;
+            height: 38px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 6px;
             display: flex;
@@ -666,6 +706,7 @@
             color: var(--white);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1.1rem;
         }
 
         .social-link:hover {
@@ -675,10 +716,10 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
+            padding-top: 1.8rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         /* ===== АНИМАЦИИ ===== */
@@ -715,23 +756,32 @@
             }
             
             .hero-text h1 {
-                font-size: 3.2rem;
+                font-size: 3rem;
+            }
+            
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
             }
             
             .image-frame {
                 height: 400px;
+            }
+            
+            .hero-text .btn-group {
+                justify-content: center;
             }
         }
 
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
             }
             
             .nav {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
                 width: 100%;
             }
             
@@ -741,16 +791,20 @@
                 gap: 1rem;
             }
             
+            .header-phone {
+                margin-top: 0.5rem;
+            }
+            
             .hero {
                 padding-top: 150px;
             }
             
             .hero-text h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .materials-header {
@@ -761,16 +815,15 @@
             .filter-buttons {
                 justify-content: center;
             }
-            
-            .features-grid,
-            .materials-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 480px) {
             .hero-text h1 {
-                font-size: 2.4rem;
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
             }
             
             .btn {
@@ -780,14 +833,37 @@
             
             .feature-card,
             .material-content {
-                padding: 2rem;
+                padding: 1.8rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
             }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Код Яндекс.Метрики (замените XXXXXXXXX на номер вашего счётчика) -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(XXXXXXXXX, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true,
+            trackHash:true,
+            ecommerce:false
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Яндекс.Метрика -->
 </head>
 <body>
-     <!-- Шапка -->
+    <!-- Шапка -->
     <header class="header" id="header">
         <div class="container">
             <div class="header-content">
@@ -800,20 +876,25 @@
                 </a>
                 
                 <nav class="nav">
-                 <ul class="nav-links">
+                    <ul class="nav-links">
                         <li><a href="index.html" class="nav-link active">Главная</a></li>
-                        <li><a href="about-china.html" class="nav-link">О Китае</a></li>
-                        <li><a href="knowledge.html" class="nav-link">База знаний</a></li>
-                        <li><a href="tests.html" class="nav-link">Тесты</a></li>
+                        <li><a href="#about" class="nav-link">О Китае</a></li>
+                        <li><a href="#knowledge" class="nav-link">База знаний</a></li>
+                        <li><a href="#tests" class="nav-link">Тесты</a></li>
                     </ul>
-                </div>
                 </nav>
+
+                <!-- ДОБАВЛЕННЫЙ ТЕЛЕФОН С ЦЕЛЬЮ ЯНДЕКС.МЕТРИКИ -->
+                <div class="header-phone" onclick="ym(XXXXXXXXX, 'reachGoal', 'phone_click'); return true;">
+                    <span class="phone-icon">📞</span>
+                    <a href="tel:+74951234567" class="phone-number">+7 (495) 123-45-67</a>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Герой секция -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-pattern"></div>
         <div class="container">
             <div class="hero-content">
@@ -828,7 +909,7 @@
                         <a href="#features" class="btn btn-primary">
                             Начать исследование
                         </a>
-                        <a href="knowledge.html" class="btn btn-outline">
+                        <a href="#knowledge" class="btn btn-outline">
                             Изучить материалы
                         </a>
                     </div>
@@ -856,7 +937,7 @@
                         Работаем с первоисточниками и носителями культуры. 
                         Каждый материал проверен экспертами в области синологии.
                     </p>
-                    <a href="about-china.html" class="feature-link">
+                    <a href="#about" class="feature-link">
                         Узнать больше
                     </a>
                 </div>
@@ -868,7 +949,7 @@
                         Информация организована по уровням сложности и темам. 
                         От базовых понятий до углубленного изучения культурных кодов.
                     </p>
-                    <a href="knowledge.html" class="feature-link">
+                    <a href="#knowledge" class="feature-link">
                         Изучить структуру
                     </a>
                 </div>
@@ -880,7 +961,7 @@
                         Сотрудничаем с университетами и культурными институтами. 
                         Наши материалы используются в образовательных программах.
                     </p>
-                    <a href="about-project.html" class="feature-link">
+                    <a href="#about" class="feature-link">
                         О методике
                     </a>
                 </div>
@@ -889,7 +970,7 @@
     </section>
 
     <!-- Материалы -->
-    <section class="materials">
+    <section class="materials" id="knowledge">
         <div class="container">
             <div class="materials-header fade-in">
                 <h2 class="section-title" style="text-align: left; margin: 0;">
@@ -914,7 +995,7 @@
                             От традиционных пагод до современных небоскребов. 
                             Как менялась архитектура Китая на протяжении веков.
                         </p>
-                        <a href="knowledge.html" class="btn btn-outline" style="padding: 0.7rem 1.8rem;">
+                        <a href="#knowledge" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">
                             Исследовать
                         </a>
                     </div>
@@ -930,7 +1011,7 @@
                             Восемь великих кухонь Китая. Философия, ингредиенты 
                             и культурный контекст традиционных блюд.
                         </p>
-                        <a href="knowledge.html" class="btn btn-outline" style="padding: 0.7rem 1.8rem;">
+                        <a href="#knowledge" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">
                             Изучить
                         </a>
                     </div>
@@ -946,7 +1027,7 @@
                             Как эффективно общаться с китайскими партнерами. 
                             Особенности делового и социального этикета.
                         </p>
-                        <a href="knowledge.html" class="btn btn-outline" style="padding: 0.7rem 1.8rem;">
+                        <a href="#knowledge" class="btn btn-outline" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">
                             Узнать
                         </a>
                     </div>
@@ -956,7 +1037,7 @@
     </section>
 
     <!-- Статистика -->
-    <section class="stats">
+    <section class="stats" id="stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item fade-in">
@@ -980,7 +1061,7 @@
     </section>
 
     <!-- Футер -->
-    <footer class="footer">
+    <footer class="footer" id="about">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -995,10 +1076,10 @@
                         </p>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link">in</a>
-                        <a href="#" class="social-link">fb</a>
-                        <a href="#" class="social-link">yt</a>
-                        <a href="#" class="social-link">tg</a>
+                        <a href="#" class="social-link" onclick="ym(XXXXXXXXX, 'reachGoal', 'social_click'); return true;">in</a>
+                        <a href="#" class="social-link" onclick="ym(XXXXXXXXX, 'reachGoal', 'social_click'); return true;">fb</a>
+                        <a href="#" class="social-link" onclick="ym(XXXXXXXXX, 'reachGoal', 'social_click'); return true;">yt</a>
+                        <a href="#" class="social-link" onclick="ym(XXXXXXXXX, 'reachGoal', 'social_click'); return true;">tg</a>
                     </div>
                 </div>
                 
@@ -1006,10 +1087,10 @@
                     <h4>Навигация</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">Главная</a></li>
-                        <li><a href="about-china.html">О Китае</a></li>
-                        <li><a href="knowledge.html">База знаний</a></li>
-                        <li><a href="tests.html">Тестирование</a></li>
-                        <li><a href="about-project.html">О проекте</a></li>
+                        <li><a href="#about">О Китае</a></li>
+                        <li><a href="#knowledge">База знаний</a></li>
+                        <li><a href="#tests">Тестирование</a></li>
+                        <li><a href="#about">О проекте</a></li>
                     </ul>
                 </div>
                 
@@ -1017,7 +1098,7 @@
                     <h4>Контакты</h4>
                     <ul class="footer-links">
                         <li><a href="mailto:info@chinaguide.ru">info@chinaguide.ru</a></li>
-                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li><a href="tel:+74951234567" onclick="ym(XXXXXXXXX, 'reachGoal', 'phone_click'); return true;">+7 (495) 123-45-67</a></li>
                         <li>Москва, Китайгородский пр., 7</li>
                         <li>Пн-Пт, 9:00-18:00</li>
                     </ul>
