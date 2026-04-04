@@ -1192,22 +1192,28 @@
         return { wasCompleted, newScore: score };
     }
 
-    // Обновить виджет прогресса
+    // Обновить виджет прогресса (исправленная версия с проверками)
     function updateProgressWidget() {
         const progress = initializeProgress();
         
-        document.getElementById('completedTests').textContent = progress.completedTests;
-        document.getElementById('totalTests').textContent = TESTS_COUNT;
-        document.getElementById('totalScore').textContent = progress.totalScore;
-        document.getElementById('correctAnswersTotal').textContent = progress.correctAnswers;
-        document.getElementById('totalQuestionsAll').textContent = progress.totalQuestions;
+        // Проверяем существование элементов перед изменением
+        const completedTestsEl = document.getElementById('completedTests');
+        const totalScoreEl = document.getElementById('totalScore');
+        const correctAnswersTotalEl = document.getElementById('correctAnswersTotal');
+        const totalQuestionsAllEl = document.getElementById('totalQuestionsAll');
+        const progressTextEl = document.getElementById('progressText');
         
-        // Обновить текст на кнопке прогресса
-        const progressText = document.getElementById('progressText');
-        if (progress.completedTests > 0) {
-            progressText.innerHTML = `Прогресс (${progress.completedTests}/${TESTS_COUNT})`;
-        } else {
-            progressText.textContent = 'Прогресс';
+        if (completedTestsEl) completedTestsEl.textContent = progress.completedTests;
+        if (totalScoreEl) totalScoreEl.textContent = progress.totalScore;
+        if (correctAnswersTotalEl) correctAnswersTotalEl.textContent = progress.correctAnswers;
+        if (totalQuestionsAllEl) totalQuestionsAllEl.textContent = progress.totalQuestions;
+        
+        if (progressTextEl) {
+            if (progress.completedTests > 0) {
+                progressTextEl.innerHTML = `Прогресс (${progress.completedTests}/${TESTS_COUNT})`;
+            } else {
+                progressTextEl.textContent = 'Прогресс';
+            }
         }
     }
 
@@ -1815,49 +1821,56 @@
     // Добавляем виджет в DOM
     document.body.insertAdjacentHTML('beforeend', progressWidgetHTML);
 
-    // Показать/скрыть виджет прогресса
+    // Показать/скрыть виджет прогресса (с проверками)
     const progressBtn = document.getElementById('progressBtn');
     const progressWidget = document.getElementById('progressWidget');
-    const closeWidgetBtn = progressWidget.querySelector('.close-widget-btn');
-    const resetProgressBtn = document.getElementById('resetProgressBtn');
+    
+    // Проверяем, существует ли кнопка и виджет
+    if (progressBtn && progressWidget) {
+        const closeWidgetBtn = progressWidget.querySelector('.close-widget-btn');
+        const resetProgressBtn = document.getElementById('resetProgressBtn');
 
-    progressBtn.addEventListener('click', function() {
-        updateProgressWidget();
-        progressWidget.style.display = 'block';
-    });
-
-    closeWidgetBtn.addEventListener('click', function() {
-        progressWidget.style.display = 'none';
-    });
-
-    // Сброс прогресса
-    resetProgressBtn.addEventListener('click', function() {
-        if (confirm('Вы уверены, что хотите сбросить весь прогресс? Все результаты будут удалены.')) {
-            localStorage.removeItem(PROGRESS_KEY);
+        progressBtn.addEventListener('click', function() {
             updateProgressWidget();
-            updateTestCardsStatus();
-            alert('Прогресс сброшен!');
-            
-            // Обновляем кнопки на карточках
-            document.querySelectorAll('.start-test').forEach(btn => {
-                btn.innerHTML = 'Начать тест';
-            });
-            
-            // Удаляем бейджи
-            document.querySelectorAll('.test-completed-badge').forEach(badge => {
-                badge.remove();
+            progressWidget.style.display = 'block';
+        });
+
+        if (closeWidgetBtn) {
+            closeWidgetBtn.addEventListener('click', function() {
+                progressWidget.style.display = 'none';
             });
         }
-    });
+
+        if (resetProgressBtn) {
+            resetProgressBtn.addEventListener('click', function() {
+                if (confirm('Вы уверены, что хотите сбросить весь прогресс? Все результаты будут удалены.')) {
+                    localStorage.removeItem(PROGRESS_KEY);
+                    updateProgressWidget();
+                    updateTestCardsStatus();
+                    alert('Прогресс сброшен!');
+                    
+                    // Обновляем кнопки на карточках
+                    document.querySelectorAll('.start-test').forEach(btn => {
+                        btn.innerHTML = 'Начать тест';
+                    });
+                    
+                    // Удаляем бейджи
+                    document.querySelectorAll('.test-completed-badge').forEach(badge => {
+                        badge.remove();
+                    });
+                }
+            });
+        }
+    }
 
     // Закрытие виджета при клике вне его
     document.addEventListener('click', function(event) {
         const widget = document.getElementById('progressWidget');
         const progressBtn = document.getElementById('progressBtn');
         
-        if (widget.style.display === 'block' && 
+        if (widget && widget.style.display === 'block' && 
             !widget.contains(event.target) && 
-            !progressBtn.contains(event.target)) {
+            progressBtn && !progressBtn.contains(event.target)) {
             widget.style.display = 'none';
         }
     });
@@ -1870,106 +1883,110 @@
         updateTestCardsStatus();
         
         // Обновляем количество тестов в виджете
-        document.getElementById('totalTests').textContent = TESTS_COUNT;
+        const totalTestsSpan = document.getElementById('totalTests');
+        if (totalTestsSpan) totalTestsSpan.textContent = TESTS_COUNT;
         
         // Инициализация прогресс-бара
-        progressFill.style.width = '0%';
+        if (progressFill) progressFill.style.width = '0%';
         
-        // Добавляем стили для виджета прогресса
-        const style = document.createElement('style');
-        style.textContent = `
-            #progressWidget {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: var(--white);
-                padding: 1.5rem;
-                border-radius: var(--radius);
-                box-shadow: var(--shadow);
-                border: 1px solid var(--mineral-red);
-                z-index: 1000;
-                max-width: 300px;
-                animation: slideIn 0.3s ease;
-            }
+        // Добавляем стили для виджета прогресса (если их нет)
+        if (!document.getElementById('widget-styles')) {
+            const style = document.createElement('style');
+            style.id = 'widget-styles';
+            style.textContent = `
+                #progressWidget {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--white);
+                    padding: 1.5rem;
+                    border-radius: var(--radius);
+                    box-shadow: var(--shadow);
+                    border: 1px solid var(--mineral-red);
+                    z-index: 1000;
+                    max-width: 300px;
+                    animation: slideIn 0.3s ease;
+                }
 
-            .progress-widget-content {
-                position: relative;
-                min-width: 250px;
-            }
+                .progress-widget-content {
+                    position: relative;
+                    min-width: 250px;
+                }
 
-            .progress-widget-content h3 {
-                color: var(--mineral-red);
-                margin-bottom: 1rem;
-                font-size: 1.2rem;
-            }
+                .progress-widget-content h3 {
+                    color: var(--mineral-red);
+                    margin-bottom: 1rem;
+                    font-size: 1.2rem;
+                }
 
-            .progress-stats {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                font-size: 0.95rem;
-            }
+                .progress-stats {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    font-size: 0.95rem;
+                }
 
-            .progress-stats div {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 0.5rem;
-                padding-bottom: 0.5rem;
-                border-bottom: 1px solid var(--stone);
-            }
+                .progress-stats div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 0.5rem;
+                    padding-bottom: 0.5rem;
+                    border-bottom: 1px solid var(--stone);
+                }
 
-            .progress-stats div:last-child {
-                border-bottom: none;
-                margin-bottom: 0;
-            }
+                .progress-stats div:last-child {
+                    border-bottom: none;
+                    margin-bottom: 0;
+                }
 
-            .progress-stats strong {
-                color: var(--mineral-red);
-                font-size: 1.1rem;
-            }
+                .progress-stats strong {
+                    color: var(--mineral-red);
+                    font-size: 1.1rem;
+                }
 
-            .close-widget-btn {
-                position: absolute;
-                top: -10px;
-                right: -10px;
-                width: 25px;
-                height: 25px;
-                background: var(--mineral-red);
-                color: white;
-                border: none;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+                .close-widget-btn {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    width: 25px;
+                    height: 25px;
+                    background: var(--mineral-red);
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
 
-            #resetProgressBtn {
-                padding: 0.8rem;
-                background: var(--incorrect) !important;
-                color: white;
-                border: none;
-                border-radius: 6px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                width: 100%;
-                margin-top: 0.5rem;
-            }
-            
-            #resetProgressBtn:hover {
-                background: #d32f2f !important;
-                transform: translateY(-2px);
-            }
+                #resetProgressBtn {
+                    padding: 0.8rem;
+                    background: var(--incorrect) !important;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    width: 100%;
+                    margin-top: 0.5rem;
+                }
+                
+                #resetProgressBtn:hover {
+                    background: #d32f2f !important;
+                    transform: translateY(-2px);
+                }
 
-            @keyframes slideIn {
-                from { transform: translateY(100px); opacity: 0; }
-                to { transform: translateY(0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
+                @keyframes slideIn {
+                    from { transform: translateY(100px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
     });
 </script>
 </body>
